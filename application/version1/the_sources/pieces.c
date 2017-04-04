@@ -1,9 +1,9 @@
 typedef enum couleur_t {
-	BLANC, NOIR;
+	BLANC, NOIR
 } couleur_t ;
 
 typedef enum piece_t {
-	K, Q, B, N, R, P, VIDE, ETOILE; // VIDE=' ' ETOILE= '*' 
+	K, Q, B, N, R, P, VIDE, ETOILE // VIDE=' ' ETOILE= '*' 
 } piece_t ;
 
 

@@ -1,11 +1,7 @@
-#if defined LOCALE && LOCALE=FR
-    int locale = 0; // locale is FR
-#else
-    int locale = 1; // locale is EN
-#endif
+// #include "pieces.c"
 
 
-
-int main(){
-    printf("Locale is %d", locale);
+int main(int argc, char const *argv[])
+{
+	return 0;
 }
