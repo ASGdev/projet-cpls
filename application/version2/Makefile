@@ -7,13 +7,15 @@ INCLUDE=-Ithe_headers
 OPTIM=-O2
 
 # Executable
-main : main.o
+main : main.o tap.o
 	$(CC) -o $@ $^
-	cp $@ bin/
 
-main.o: main.c
-    $(CC) $(INCLUDE)  -c  $<
-	
+main.o:
+	$(CC) $(INCLUDE) -D LOCALE=en -c $(SRC_DIR)/testing/main.c
+
+tap.o:
+	$(CC) $(INCLUDE) -c $(SRC_DIR)/testing/tap.c
+
 clean:
 	rm -f *.o *~ 
 
