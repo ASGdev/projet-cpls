@@ -8,10 +8,10 @@ OPTIM=-O2
 
 # Executable
 main : main.o tap.o
-	$(CC) -o $@ $^
+	$(CC) -L. -lvt100 -o $@ $^
 
 main.o:
-	$(CC) $(INCLUDE) -D LOCALE=en -c $(SRC_DIR)/testing/main.c
+	$(CC) $(INCLUDE) -g -D LOCALE=en -c $(SRC_DIR)/testing/main.c
 
 tap.o:
 	$(CC) $(INCLUDE) -c $(SRC_DIR)/testing/tap.c

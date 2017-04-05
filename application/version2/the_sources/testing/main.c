@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include "vt100.h"
 
 #include "tap.h"
 
@@ -19,7 +20,12 @@ typedef uint32_t echiquier_t[8];
 
 typedef uint32_t case_t;
 
-
+// 1 means user input
+typedef struct {
+    int inputMode;
+    couleur_t couleurCourante;
+    FILE *outputFile;
+} game_t;
 
 typedef struct {
     int numero; // nuémro du coup
@@ -29,12 +35,12 @@ typedef struct {
     struct coup_t *prochain; // référence sur le prochain coup
 } coup_t;
 
-struct
+typedef struct
 {
     int numeroCourant;
     couleur_t couleurCourante;
     struct coup_t *premierCoup; // référence vers le premier coup
-} listeCoup;
+} listeCoup_t;
 
 
 
@@ -70,25 +76,36 @@ char* getCoups(FILE *fp){
     /* on insère les coups dans une variable "tampon". Permet notamment de libérer le fichier et un accès plus rapide car en mémoire */
 
     /* itération pour découvrir le nombre de ligne du fichier - optimisation : utiliser realloc on-the-fly */
-    int lines = 0;
-    char *line;
+    int lineCount= 0;
+    char string[5];
     while (!feof(fp)) {
-        fgets(line,150,fp);
-        lines++;
+        fscanf(fp, "%5c" , &string);
+        lineCount++;
     }
 
-    printf("%d",lines);
+    printf("%d\n",lineCount);
 
-    char *listeCoup = malloc(4 * lines * sizeof(char));
-
+    char *listeCoup = malloc(4 * lineCount * sizeof(char));
+    
+    char c;
+    int flag = 0;
     int i = 0;
-    char *l;
-    while (1)
-    {
-        fscanf(fp, "%c%c%c%c", *(listeCoup + i), *(listeCoup + i + 1), *(listeCoup + i + 2), *(listeCoup + i + 3));
-        i += 4;
-        if( fscanf(input,"%s") == EOF )
-           break;
+
+    rewind(fp);
+    while ((c = fgetc(fp)) != EOF){
+        if(c != '\n'){
+            printf("%c %d\n", c, flag);
+            *(listeCoup + i) = c;
+            i++;
+            flag++;
+        } else {
+            if(flag < 4){
+                printf("Erreur fichier\n");
+                exit(65); // EX_DATAERR
+            }
+            flag = 0;
+        }
+        
     }
 
     fclose(fp);
@@ -153,7 +170,7 @@ int char_colonne_valide(char l){
 }
 
 /* Create move */
-int creer_coup(coup_t *liste, char c[255], char move[4]){
+int creer_coup(listeCoup_t *liste, char c[255], char move[4]){
     // move pas sur la même case
     if (move[0] == move[2] && move[1] == move[3]){
         return -1;
@@ -162,45 +179,106 @@ int creer_coup(coup_t *liste, char c[255], char move[4]){
     //get couleur case et vérifier que ce coup est de couleur adverse que le coup précédent
 
     // le coup est validé
-    t_coup *coup = malloc(sizeof(coup_t));
-    *liste->numeroCourant++;
-    *coup->numero = *liste->numeroCourant;
+    coup_t *coup = malloc(sizeof(coup_t));
+    liste->numeroCourant++;
+    //*coup.numero = *liste->numeroCourant;
     
 
 
 
 }
 
+void afficher_octet(char p, affiche_func_param_t f){
+    putchar(p);
+}
+
+void maj_affichage(){
+    definir_coloris(BSN, WHITE, BLACK);
+    definir_coloris(NSB, BLACK, WHITE);
+    FILE *fout = stdout;   
+    affiche_func_param_t u;
+
+
+    printf("   a  b  c  d  e  f  g  h\n\n");
+    for(int i = 0; i < 8; i++){
+        // lignes
+        putchar(i+1+'0');
+        putchar(' ');
+        for(int j = 0; j < 8; j++){
+            // colonnes
+            dessiner_case(BSN, ' ', afficher_octet, u);
+            dessiner_case(BSN, 'p', afficher_octet, u);
+            dessiner_case(BSN, ' ', afficher_octet, u);
+        }
+        printf("\n\n");
+    }
+
+
+}
+
+int ecrire_coup_fichier(){
+
+}
 
 int main(int argc, char *argv[]){
     FILE *fp;
 
+    game_t jeux;
+
     if(argc < 2){
-        printf("Pas de fichier de jeu fourni.\n");
+        printf("Pas de fichier de jeu fourni : passage en mode clavier\n");
+        // passage en mode clavier
+        jeux.inputMode = 1;      
     } else {
         // on assume que le chemin du fichier est dans le 1er paramètre
         fp = fopen(argv[1], "r");
         if(fp == NULL){
             printf("Erreur dans le fichier.\n");
-            exit(66); //no input - see man sysexits
+            exit(66); //no input - voir man sysexits
         }
+        // lecture du fichier
+        char* l = getCoups(fp);
+        for(int i = 0; i<60 ; i++){
+            printf(" %c ", *(l+i));
+        }
+        
     }
 
+    
+    /* initialisation */
     echiquier_t *e = malloc(sizeof(echiquier_t));
-    case_t *c = malloc(sizeof(case_t));
+    //case_t *c = malloc(sizeof(case_t));
 
     //e = set_case(e, 0, 0, *c);
     //get_case(e, 0, 0, c);
 
-    t_coup *listeCoup;
+    //t_coup *listeCoup;
+
+    printf("Nouvel échiquier :\n");
+
+    maj_affichage();
+
+    printf("C'est parti !\n");
+
+    if(jeux.mode == 1){
+        jeux.couleurCourante = white;
+        printf("Ecrire \"fin\" pour finir la partie.\n");
+        printf("Joueur Blanc commence : \n");
+    }
+
+    if(jeux.mode == 0){
+        // liste
+
+    } else {
+        // insertion clavier
 
 
-
+    }
 
 
 
     printf("\n==== Tests ====\n");
-    is(locale, fr);
+    //is(locale, fr);
     done_testing();
 }
 
