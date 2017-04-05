@@ -125,9 +125,9 @@ char colonne_de_indice (int indice){
 }
 
 int char_ligne_valide(char indice){
-	return indice_de_ligne(indice) == -1;
+	return indice_de_ligne(indice) != -1; // Si c'est vrai renvoie 1 et alors valide
 }
 
 int char_colonne_valide(char indice){
-	return indice_de_colonne(indice) == -1;
+	return indice_de_colonne(indice) != -1;
 }
