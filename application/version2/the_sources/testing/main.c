@@ -48,25 +48,39 @@ typedef struct
 
 piece_t piece_de_lettre(char lettre){
 
-    if(locale == 0){
+    #if LOCALE==fr
         switch(lettre) {
-        case 'R' :
-        case 'K' :
-            return(K);
-            break;
-        case 'Q' :
-        case 'D' :
-            return (Q);
-            break;
-        case 'F' :
-        case 'B' :
-            break;
-        default :
-            break;
-    }
-    }
+            case 'R' :
+                return(K);
+                break;
+            case 'D' :
+                return (Q);
+                break;
+            case 'F' :
+                return();
+            case 'B' :
+                break;
+            default :
 
-
+                break;
+        }
+    #else
+        switch(lettre) {
+            case 'R' :
+            case 'K' :
+                return(K);
+                break;
+            case 'Q' :
+            case 'D' :
+                return (Q);
+                break;
+            case 'F' :
+            case 'B' :
+                break;
+            default :
+                break;
+        }
+    #endif
 }
 
 
@@ -223,12 +237,12 @@ int ecrire_coup_fichier(){
 int main(int argc, char *argv[]){
     FILE *fp;
 
-    game_t jeux;
+    game_t jeu;
 
     if(argc < 2){
         printf("Pas de fichier de jeu fourni : passage en mode clavier\n");
         // passage en mode clavier
-        jeux.inputMode = 1;      
+        jeu.inputMode = 1;      
     } else {
         // on assume que le chemin du fichier est dans le 1er paramètre
         fp = fopen(argv[1], "r");
@@ -260,8 +274,8 @@ int main(int argc, char *argv[]){
 
     printf("C'est parti !\n");
 
-    if(jeux.mode == 1){
-        jeux.couleurCourante = white;
+    if(jeu.mode == 1){
+        jeu.couleurCourante = white;
         printf("Ecrire \"fin\" pour finir la partie.\n");
         printf("Joueur Blanc commence : \n");
     }
@@ -271,7 +285,7 @@ int main(int argc, char *argv[]){
 
     } else {
         // insertion clavier
-
+        if(jeu.)
 
     }
 
