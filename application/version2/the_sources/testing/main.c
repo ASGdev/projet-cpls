@@ -1,9 +1,3 @@
-#if LOCALE==fr
-    #define locale 0 // locale is FR
-#else
-    #define locale 1 // locale is EN
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -15,8 +9,8 @@ typedef enum piece_t { K = 0, Q = 1, B = 2, N = 3, R = 4, P=5, EMPTY=6, MARK=7} 
 typedef enum couleur_t { white = 0, black = 1} couleur_t; 
 
 
-
 typedef uint32_t echiquier_t[8];
+
 
 typedef uint32_t case_t;
 
@@ -57,7 +51,6 @@ piece_t piece_de_lettre(char lettre){
                 return (Q);
                 break;
             case 'F' :
-                return();
             case 'B' :
                 break;
             default :
@@ -202,6 +195,12 @@ int creer_coup(listeCoup_t *liste, char c[255], char move[4]){
 
 }
 
+int valider_regle(coup_t coup) {
+    
+
+
+}
+
 void afficher_octet(char p, affiche_func_param_t f){
     putchar(p);
 }
@@ -272,20 +271,41 @@ int main(int argc, char *argv[]){
 
     maj_affichage();
 
+    printf("Ecrire \"fin\" pour finir la partie.\n");
     printf("C'est parti !\n");
 
-    if(jeu.mode == 1){
-        jeu.couleurCourante = white;
-        printf("Ecrire \"fin\" pour finir la partie.\n");
-        printf("Joueur Blanc commence : \n");
-    }
+  
+    jeu.couleurCourante = black;
 
-    if(jeux.mode == 0){
+
+    if(jeu.inputMode == 0){
         // liste
 
     } else {
         // insertion clavier
-        if(jeu.)
+        char newMove[5];
+        char poub;
+        do {
+            newMove[0] = ' ';
+            newMove[1] = ' ';
+            newMove[2] = ' '; 
+            newMove[3] = ' '; 
+            newMove[4] = ' ';
+            if(jeu.couleurCourante == white){
+                printf("Joueur Noir joue : ");
+                jeu.couleurCourante = black;
+            } else {
+                printf("Joueur Blanc joue : ");
+                jeu.couleurCourante = white;
+            }
+            // move ou fin
+            fgets(newMove, 15, stdin);
+            newMove[4]='\0';
+            printf("Newmove = %s-", newMove);
+            printf("\n");
+
+        } while(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n');
+        
 
     }
 
