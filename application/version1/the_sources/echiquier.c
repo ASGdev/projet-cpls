@@ -1,33 +1,24 @@
 #include "main.c"
 #include "pieces.c"
 
-typedef struct case_t {
-	couleur_t couleur;
-	piece_t piece;
-} case_t;
-
-typedef struct echiquier_t {
-	case_t tab[8][8];
-} echiquier_t;
-
-echiquier_t echiquier1(){
-	int i=0;
-	int j=0;
-	echiquier_t echec;
-	for (i = 0; i < 8; ++i){
-		for (j = 0; j < 8; ++j){
-			if (i+j%2 == 0){
-				echec.tab[i][j] = (case_t){BLANC, VIDE};	
-			}else{
-				echec.tab[i][j] = (case_t){NOIR, VIDE};
-			}
-		}
-	}
-	// for(int i = 0; i<8; i++){
-	// 	echiquier.tab[1][i].piece = P;
-	// 	echiquier.tab[7][i].piece = P;
-	// }
-}
+// echiquier_t echiquier1(){
+// 	int i=0;
+// 	int j=0;
+// 	echiquier_t echec;
+// 	for (i = 0; i < 8; ++i){
+// 		for (j = 0; j < 8; ++j){
+// 			if (i+j%2 == 0){
+// 				echec.tab[i][j] = (case_t){BLANC, VIDE};	
+// 			}else{
+// 				echec.tab[i][j] = (case_t){NOIR, VIDE};
+// 			}
+// 		}
+// 	}
+// 	// for(int i = 0; i<8; i++){
+// 	// 	echiquier.tab[1][i].piece = P;
+// 	// 	echiquier.tab[7][i].piece = P;
+// 	// }
+// }
 
 case_t case_t_de_pc(piece_t piece, couleur_t couleur){
 	return ((case_t) {couleur, piece});
