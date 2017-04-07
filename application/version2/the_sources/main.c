@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "vt100.h"
+#include "../the_headers/vt100.h"
 
-#include "tap.h"
 
 typedef enum piece_t { K = 0, Q = 1, B = 2, N = 3, R = 4, P=5, EMPTY=6, MARK=7} piece_t;
 typedef enum couleur_t { white = 0, black = 1} couleur_t; 
@@ -309,11 +308,6 @@ int main(int argc, char *argv[]){
 
     }
 
-
-
-    printf("\n==== Tests ====\n");
-    //is(locale, fr);
-    done_testing();
 }
 
 

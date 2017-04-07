@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include "../the_headers/vt100.h"
 #include "vt100.h"
-#include "structures.h"
-#include "echiquier.h"
-#include "pieces.h"
+
 
 void afficher_octet(char p, affiche_func_param_t f){
     putchar(p);

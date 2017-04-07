@@ -1,4 +1,19 @@
-// #include "structures.h"
+#include "pieces.h"
+
+typedef enum couleur_t {
+	BLANC, NOIR
+} couleur_t ;
+
+typedef struct case_t {
+	couleur_t couleur;
+	piece_t piece;
+} case_t;
+
+typedef struct echiquier_t {
+	case_t tab[8][8];
+} echiquier_t;
+
+
 
 
 echiquier_t initechequier();

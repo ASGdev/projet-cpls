@@ -1,5 +1,4 @@
-
-#include "structures.h"
+#include "echiquier.h"
 
 
 echiquier_t initechequier(){
