@@ -1,24 +1,45 @@
-#include "main.c"
-#include "pieces.c"
 
-// echiquier_t echiquier1(){
-// 	int i=0;
-// 	int j=0;
-// 	echiquier_t echec;
-// 	for (i = 0; i < 8; ++i){
-// 		for (j = 0; j < 8; ++j){
-// 			if (i+j%2 == 0){
-// 				echec.tab[i][j] = (case_t){BLANC, VIDE};	
-// 			}else{
-// 				echec.tab[i][j] = (case_t){NOIR, VIDE};
-// 			}
-// 		}
-// 	}
-// 	// for(int i = 0; i<8; i++){
-// 	// 	echiquier.tab[1][i].piece = P;
-// 	// 	echiquier.tab[7][i].piece = P;
-// 	// }
-// }
+#include "structures.h"
+
+
+echiquier_t initechequier(){
+	int i=0;
+	int j=0;
+	echiquier_t echec;
+	for (i = 0; i < 8; ++i){
+		for (j = 0; j < 8; ++j){
+			if (i+j%2 == 0){
+				echec.tab[i][j] = (case_t){BLANC, VIDE};	
+			}else{
+				echec.tab[i][j] = (case_t){NOIR, VIDE};
+			}
+		}
+	}
+	for(int j = 0; j<8; j++){
+		for (int i = 0; i < 8; ++i){
+			if(j==6||j==2){
+				echec.tab[i][j].piece = P;
+			}
+			if (i==0&&j==0||i==7&&j==0||i==0&&j==7||i==7&&j==7){
+				echec.tab[i][j].piece = R;
+			}
+			if (i==1&&j==0||i==6&&j==0||i==1&&j==7||i==6&&j==7){
+				echec.tab[i][j].piece = N;
+			}
+			if (i==2&&j==0||i==5&&j==0||i==2&&j==7||i==5&&j==7){
+				echec.tab[i][j].piece = B;
+			}
+			if (i==4&&j==0||i==3&&j==7){
+				echec.tab[i][j].piece = Q;
+
+			}
+			if (i==3&&j==0||i==4&&j==7){
+				echec.tab[i][j].piece = K;
+
+			}
+		}
+	}
+}
 
 case_t case_t_de_pc(piece_t piece, couleur_t couleur){
 	return ((case_t) {couleur, piece});

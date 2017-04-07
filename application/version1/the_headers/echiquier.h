@@ -1,11 +1,7 @@
-typedef struct case_t {
-	couleur_t couleur;
-	piece_t piece;
-} case_t;
+// #include "structures.h"
 
-typedef struct echiquier_t {
-	case_t tab[8][8];
-} echiquier_t;
+
+echiquier_t initechequier();
 
 case_t case_t_de_pc(piece_t piece, couleur_t couleur);
 

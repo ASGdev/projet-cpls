@@ -2,12 +2,15 @@
 #include <stdio.h>
 #include "../the_headers/vt100.h"
 #include "vt100.h"
+#include "structures.h"
+#include "echiquier.h"
+#include "pieces.h"
 
 void afficher_octet(char p, affiche_func_param_t f){
     putchar(p);
 }
 
-void maj_affichage(){
+void maj_affichage(echiquier_t echiquier){
     definir_coloris(BSN, WHITE, BLACK);
     definir_coloris(NSB, BLACK, WHITE);
     FILE *fout = stdout;   
@@ -20,25 +23,29 @@ void maj_affichage(){
         putchar(i+1+'0');
         putchar(' ');
         for(int j = 0; j < 8; j++){
-            // colonnes
+            // colonne
+            case_t casecour;
+            get_case(echiquier, i, j, casecour);
+            piece_t piececour = piece_t_de_case_t(casecour);
+            char cpiececour = lettre_de_piece(piececour);
             if (j%2 == 0){
                 if (i%2 == 0){
                     dessiner_case(NSB, ' ', afficher_octet, u);
-                    dessiner_case(NSB, 'p', afficher_octet, u);
+                    dessiner_case(NSB, cpiececour, afficher_octet, u);
                     dessiner_case(NSB, ' ', afficher_octet, u);
                 }else{
                     dessiner_case(BSN, ' ', afficher_octet, u);
-                    dessiner_case(BSN, 'p', afficher_octet, u);
+                    dessiner_case(BSN, cpiececour, afficher_octet, u);
                     dessiner_case(BSN, ' ', afficher_octet, u);
                 }
             }else{
                 if (i%2 == 1){
                     dessiner_case(NSB, ' ', afficher_octet, u);
-                    dessiner_case(NSB, 'p', afficher_octet, u);
+                    dessiner_case(NSB, cpiececour, afficher_octet, u);
                     dessiner_case(NSB, ' ', afficher_octet, u);
                 }else{
                     dessiner_case(BSN, ' ', afficher_octet, u);
-                    dessiner_case(BSN, 'p', afficher_octet, u);
+                    dessiner_case(BSN, cpiececour, afficher_octet, u);
                     dessiner_case(BSN, ' ', afficher_octet, u);
                 } 
             }
@@ -48,6 +55,7 @@ void maj_affichage(){
 }
 
 int main(){
-    maj_affichage();
+    echiquier_t echiquier = initechequier();
+    maj_affichage(echiquier);
 	return 0;
 }

@@ -1,3 +1,6 @@
+#include "structures.h"
+
+
 piece_t piece_de_lettre (char piece){
 	switch (piece){
 		case 'K':

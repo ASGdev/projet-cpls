@@ -1,9 +1,4 @@
-typedef struct coup_t {
-	int numero;
-	couleur_t joueur;
-	echiquier_t courant;
-	char commentaire [255];
-	struct coup_t *prochain;
-}coup_t;
+#include "structures.h"
+#include "structures.c"
 
 int creer_coup(coup_t *liste, char c[255], char move[4]);

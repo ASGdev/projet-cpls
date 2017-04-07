@@ -2,7 +2,7 @@ all: main clean
 
 CC=gcc
 SRC_DIR=the_sources
-INCLUDE=-Ithe_headers
+INCLUDE=-I./the_headers
 
 OPTIM=-O2
 
@@ -10,7 +10,7 @@ OPTIM=-O2
 main :
 	# $(CC) $(INCLUDE) -L/media/bastien/DATA/polytech/csystem/projet/clone3/projet-cpls/lib/ -lvt100 $(SRC_DIR)/main.c -o $@ 
 
-	$(CC) ./the_sources/main.c -o main -L./../../lib -lvt100
+	$(CC) $(INCLUDE) ./the_sources/*.c -o main -L./../../lib -lvt100
 
 # main.o:
 # 	$(CC) $(INCLUDE) -c $(SRC_DIR)/main.c
