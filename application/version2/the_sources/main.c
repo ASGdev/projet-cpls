@@ -5,7 +5,7 @@
 
 
 typedef enum piece_t { K = 0, Q = 1, B = 2, N = 3, R = 4, P=5, EMPTY=6, MARK=7} piece_t;
-typedef enum couleur_t { white = 0, black = 1} couleur_t; 
+typedef enum couleur_t { white = 0, black = 1} couleur_t;
 
 
 typedef uint32_t echiquier_t[8];
@@ -22,7 +22,7 @@ typedef struct {
 } game_t;
 
 typedef struct {
-    int numero; // nuémro du coup
+    int numero; // numéro du coup
     couleur_t joueur; // couleur du joueur
     echiquier_t courant; // echiquier courant
     char commentaire[255]; // commentaire sur 255 caractères max
@@ -87,15 +87,18 @@ char* getCoups(FILE *fp){
     char string[5];
     while (!feof(fp)) {
         fscanf(fp, "%5c" , string);
-        lineCount++;
+        if(string[0] != '\n'){
+            // si ligne pas vide
+            lineCount++;
+        }
     }
 
     #ifdef DEBUG
     	printf("Nombre de lignes du fichier : %d\n",lineCount);
     #endif
 
-    char *listeCoup = malloc(4 * lineCount * sizeof(char));
-    
+    char *listeCoup = malloc(4 * lineCount * sizeof(char) + sizeof(char));
+
     char c;
     int flag = 0;
     int i = 0;
@@ -103,7 +106,6 @@ char* getCoups(FILE *fp){
     rewind(fp);
     while ((c = fgetc(fp)) != EOF){
         if(c != '\n'){
-        	
         	#ifdef DEBUG
             	printf("%c %d\n", c, flag);
             #endif
@@ -118,9 +120,9 @@ char* getCoups(FILE *fp){
             }
             flag = 0;
         }
-        
     }
 
+    *(listeCoup + i + 1) = '\0';
     fclose(fp);
     return listeCoup;
 }
@@ -143,19 +145,35 @@ couleur_t couleur_t_de_case_t(case_t c){
     return c&1;
 }
 
-echiquier_t *set_case(echiquier_t *e, int l, int c, case_t v){
-    uint32_t depart = 43690;
-    uint32_t mask = ~240;
-    uint32_t b = depart&mask;
-    printf("Case content b : %04x", b);
-    uint32_t value = 80;
-    uint32_t r = b|(value);
-    printf("Case content : %04x", r);
+void set_case(echiquier_t *e, int l, int c, case_t v){
+    // uint32_t depart = 43690;
+    // uint32_t mask = ~240;
+    // uint32_t b = depart&mask;
+    // printf("Case content b : %04x", b);
+    // uint32_t value = 80;
+    // uint32_t r = b|(value);
+    // printf("Case content : %04x", r);
+
+    #ifdef DEBUG
+        printf("Ligne : %08x\n", *e[l]);
+    #endif
+    uint32_t ligne = *e[l]; // 0000001110101
+    uint32_t mask = ~((15 << (c * 4))); // 1111111100001111111
+    printf("Mask : %08x\n", mask);
+    uint32_t t = ligne&mask; //0000 0000 1010
+    printf("t : %08x\n", t);
+    uint32_t newline = t|(v << (c * 4)); // 000 1111 0000
+    printf("newline : %08x\n", t);
+    *e[l] = newline;
+    #ifdef DEBUG
+        printf("Nouvelle ligne : %08x\n", *e[l]);
+    #endif
 }
 
 void get_case(echiquier_t *e, int l, int c, case_t* v){
-    int w = (*e[l] & (1111 << (c * 4)));
-    printf("Case content : %04x", w);
+    int w = (*e[0] & (15 << (c * 4)));
+    w =  w >> (c * 4);
+    printf("Case content : %08x\n", w);
 }
 
 int indice_de_ligne(char l){
@@ -167,45 +185,36 @@ char ligne_de_indice(int i){
 }
 
 int indice_de_colonne(char l){
-    return l-'A';
+    return l-'a';
 }
 
 char colonne_de_indice(int i){
-    return i+'A';
+    return i+'a';
 }
 
 int char_line_valide(char l){
-    return ('l'>48 && 'l'<57);
+    return (l-'a'>-1 && l-'a'<8);
 }
 
 int char_colonne_valide(char l){
-    return ('l'>64 && 'l'<73);
+    return (l-'0'>-1 && l-'0'<8);
 }
 
 /* Create move */
-int creer_coup(listeCoup_t *liste, char c[255], char move[4]){
-    // move pas sur la même case
-    if (move[0] == move[2] && move[1] == move[3]){
-        return -1;
-    }
+int creer_coup(coup_t *liste, char c[255], char move[4]){
+    // // move pas sur la même case
+    // if (move[0] == move[2] && move[1] == move[3]){
+    //     return -1;
+    // }
 
-    //get couleur case et vérifier que ce coup est de couleur adverse que le coup précédent
+    // //get couleur case et vérifier que ce coup est de couleur adverse que le coup précédent
 
-    // le coup est validé
-    coup_t *coup = malloc(sizeof(coup_t));
-    liste->numeroCourant++;
-    //*coup.numero = *liste->numeroCourant;
-    
-
-
-
+    // // le coup est validé
+    // coup_t *coup = malloc(sizeof(coup_t));
+    // liste->numeroCourant++;
+    // //*coup.numero = *liste->numeroCourant;
 }
 
-int valider_regle(coup_t coup) {
-    
-
-
-}
 
 void afficher_octet(char p, affiche_func_param_t f){
     putchar(p);
@@ -214,7 +223,7 @@ void afficher_octet(char p, affiche_func_param_t f){
 void maj_affichage(){
     definir_coloris(BSN, WHITE, BLACK);
     definir_coloris(NSB, BLACK, WHITE);
-    FILE *fout = stdout;   
+    FILE *fout = stdout;
     affiche_func_param_t u;
 
 
@@ -237,14 +246,37 @@ void maj_affichage(){
 
 void executer_tests(){
     printf("=== Début des tests ===\n");
+    printf("Ligne a valide %d\n", char_line_valide('a'));
+    printf("Ligne h valide %d\n", char_line_valide('h'));
+    printf("Ligne i valide %d\n", char_line_valide('i'));
 
+    printf("Colonne 0 valide %d\n", char_colonne_valide('0'));
+    printf("Colonne 7 valide %d\n", char_colonne_valide('7'));
+    printf("Colonne 8 valide %d\n", char_colonne_valide('8'));
 
+    printf("indice_de_ligne de 1 = %d\n", indice_de_ligne('1'));
 
+    printf("indice_de_colonne de a = %d\n", indice_de_colonne('a'));
+    printf("indice_de_colonne de h = %d\n", indice_de_colonne('h'));
+
+    echiquier_t *e = malloc(sizeof(echiquier_t));
+    // set une case (2eme colonne)
+    *e[0] = 1288;
+    printf("E[0] = %08x\n", *e[0]);
+    // get la case
+    get_case(e, 0, 2, NULL);
+    // modifie la case
+    case_t c = 10;
+    set_case(e, 0, 2, c);
+    // get la case
+    //get_case(e, 0, 2, NULL);
+    printf("E[0] = %08x\n", *e[0]);
     printf("=== Fin des tests ===\n");
 }
 
 int main(int argc, char *argv[]){
     FILE *fp;
+    char *l;
 
     game_t jeu;
     jeu.fileProvided = 0;
@@ -261,8 +293,9 @@ int main(int argc, char *argv[]){
             exit(66); //no input - voir man sysexits
         }
         // lecture du fichier
-        char* l = getCoups(fp);
+        l = getCoups(fp);
         jeu.fileProvided = 1;
+        jeu.inputMode = 0;
     }
 
 
@@ -292,6 +325,19 @@ int main(int argc, char *argv[]){
 
     if(jeu.inputMode == 0){
         // liste
+        int i = 0;
+        char move[4];
+        while(l[i] != '\0'){
+            move[0] = l[i];
+            move[1] = l[i+1];
+            move[2] = l[i+2];
+            move[3] = l[i+3];
+            i+=4;
+
+            coup_t *c;
+            creer_coup(c, "", move);
+        }
+
 
     } else {
         // insertion clavier
@@ -308,7 +354,7 @@ int main(int argc, char *argv[]){
         for(int i=0; i<257; i++){
             if(filename[i] == '\n'){
                 filename[i] = '\0';
-            }
+            }// TODO : gérer saut de ligne dans le fichier
         }
 
         fs = fopen(filename, "w+");
@@ -329,13 +375,14 @@ int main(int argc, char *argv[]){
             fgets(newMove, 15, stdin);
             newMove[4]='\0';
             #ifdef DEBUG
-            	printf("Newmove = %s-", newMove);
+            	printf("Nouveau mouvement = %s-", newMove);
 			#endif
             printf("\n");
 
             //ecriture dans le fichier (sauf fin)
             // TODO : ajout fichier de début si fichier de jeu défini
             // TODO : clean user input ?
+            // TODO : gérer saut de ligne dans le fichier
             if(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n'){
             	//fprintf(fs, newMove);
                 fputs(newMove, fs);
