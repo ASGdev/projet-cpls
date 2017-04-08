@@ -85,7 +85,7 @@ char* getCoups(FILE *fp){
     int lineCount= 0;
     char string[5];
     while (!feof(fp)) {
-        fscanf(fp, "%5c" , &string);
+        fscanf(fp, "%5c" , string);
         lineCount++;
     }
 
@@ -234,8 +234,12 @@ void maj_affichage(){
 
 }
 
-int ecrire_coup_fichier(){
+void executer_tests(){
+	printf("=== Début des tests ===\n");
 
+		
+
+	printf("=== Fin des tests ===\n");
 }
 
 int main(int argc, char *argv[]){
@@ -246,7 +250,7 @@ int main(int argc, char *argv[]){
     if(argc < 2){
         printf("Pas de fichier de jeu fourni : passage en mode clavier\n");
         // passage en mode clavier
-        jeu.inputMode = 1;      
+        jeu.inputMode = 1;
     } else {
         // on assume que le chemin du fichier est dans le 1er paramètre
         fp = fopen(argv[1], "r");
@@ -256,10 +260,10 @@ int main(int argc, char *argv[]){
         }
         // lecture du fichier
         char* l = getCoups(fp);
-        
+
     }
 
-    
+
     /* initialisation */
     echiquier_t *e = malloc(sizeof(echiquier_t));
     //case_t *c = malloc(sizeof(case_t));
@@ -277,9 +281,8 @@ int main(int argc, char *argv[]){
     	printf("Ecrire \"fin\" pour finir la partie.\n");
     	printf("C'est parti !\n");
     }
-    
 
-  
+
     jeu.couleurCourante = black;
 
 
@@ -297,7 +300,12 @@ int main(int argc, char *argv[]){
 
         printf("Nom de fichier de sortie : ");
         fgets(filename, 257, stdin);
-        filename[257] = '\0';
+        // terminate string
+        for(int i=0; i<257; i++){
+            if(filename[i] == '\n'){
+                filename[i] = '\0';
+            }
+        }
 
         fs = fopen(filename, "w+");
         if(fs == NULL){
@@ -306,11 +314,6 @@ int main(int argc, char *argv[]){
         }
 
         do {
-            newMove[0] = ' ';
-            newMove[1] = ' ';
-            newMove[2] = ' '; 
-            newMove[3] = ' '; 
-            newMove[4] = ' ';
             if(jeu.couleurCourante == white){
                 printf("Joueur Noir joue : ");
                 jeu.couleurCourante = black;
@@ -323,18 +326,21 @@ int main(int argc, char *argv[]){
             newMove[4]='\0';
             #ifdef DEBUG
             	printf("Newmove = %s-", newMove);
-			#endif	
+			#endif
             printf("\n");
 
             //ecriture dans le fichier (sauf fin)
+            // TODO : ajout fichier de début si fichier de jeu défini
+            // TODO : clean user input ?
             if(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n'){
-            	fprintf(fs, newMove);
+            	//fprintf(fs, newMove);
+                fputs(newMove, fs);
             	fprintf(fs, "\n");
             }
-            
+
 
         } while(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n');
-        
+
 
     }
 
