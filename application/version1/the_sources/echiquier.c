@@ -1,5 +1,4 @@
-#include "echiquier.h"
-
+#include "prototype.h"
 
 echiquier_t initechequier(){
 	int i=0;
@@ -8,7 +7,7 @@ echiquier_t initechequier(){
 	for (i = 0; i < 8; ++i){
 		for (j = 0; j < 8; ++j){
 			if (i+j%2 == 0){
-				echec.tab[i][j] = (case_t){BLANC, VIDE};	
+				echec.tab[i][j] = (case_t){BLANC, VIDE};
 			}else{
 				echec.tab[i][j] = (case_t){NOIR, VIDE};
 			}
@@ -16,23 +15,25 @@ echiquier_t initechequier(){
 	}
 	for(int j = 0; j<8; j++){
 		for (int i = 0; i < 8; ++i){
-			if(j==6||j==2){
+			if(j==6 || j==2){
 				echec.tab[i][j].piece = P;
 			}
-			if (i==0&&j==0||i==7&&j==0||i==0&&j==7||i==7&&j==7){
+			if (i == 0 && j == 0 || i==7 && j==0 || i==0 && j==7 || i==7 && j==7 ){
 				echec.tab[i][j].piece = R;
+				printf("tour\n");
 			}
-			if (i==1&&j==0||i==6&&j==0||i==1&&j==7||i==6&&j==7){
+			if (i==1 && j==0 || i==6 && j==0 || i==1 && j==7 || i==6 && j==7){
 				echec.tab[i][j].piece = N;
+				printf("Cheval\n");
 			}
-			if (i==2&&j==0||i==5&&j==0||i==2&&j==7||i==5&&j==7){
+			if (i==2 && j==0 || i==5 && j==0 || i==2 && j==7 || i==5 && j==7){
 				echec.tab[i][j].piece = B;
 			}
-			if (i==4&&j==0||i==3&&j==7){
+			if (i==4 && j==0 || i==3 && j==7){
 				echec.tab[i][j].piece = Q;
 
 			}
-			if (i==3&&j==0||i==4&&j==7){
+			if (i==3 && j==0 || i==4 && j==7){
 				echec.tab[i][j].piece = K;
 
 			}
