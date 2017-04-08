@@ -18,6 +18,7 @@ typedef struct {
     int inputMode;
     couleur_t couleurCourante;
     FILE *outputFile;
+    int fileProvided = 0;
 } game_t;
 
 typedef struct {
@@ -260,7 +261,7 @@ int main(int argc, char *argv[]){
         }
         // lecture du fichier
         char* l = getCoups(fp);
-
+        jeu.fileProvided = 1;
     }
 
 
@@ -341,6 +342,9 @@ int main(int argc, char *argv[]){
 
         } while(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n');
 
+        if(jeu.inputMode == 1 && jeu.fileProvided){
+            //ajout fichier de début si fichier de jeu défini
+        }
 
     }
 
