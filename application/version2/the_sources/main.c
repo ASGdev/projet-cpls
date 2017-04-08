@@ -89,7 +89,9 @@ char* getCoups(FILE *fp){
         lineCount++;
     }
 
-    printf("%d\n",lineCount);
+    #ifdef DEBUG
+    	printf("Nombre de lignes du fichier : %d\n",lineCount);
+    #endif
 
     char *listeCoup = malloc(4 * lineCount * sizeof(char));
     
@@ -100,13 +102,17 @@ char* getCoups(FILE *fp){
     rewind(fp);
     while ((c = fgetc(fp)) != EOF){
         if(c != '\n'){
-            printf("%c %d\n", c, flag);
+        	
+        	#ifdef DEBUG
+            	printf("%c %d\n", c, flag);
+            #endif
+
             *(listeCoup + i) = c;
             i++;
             flag++;
         } else {
             if(flag < 4){
-                printf("Erreur fichier\n");
+                printf("\nErreur de données dans le fichier de jeu !\n");
                 exit(65); // EX_DATAERR
             }
             flag = 0;
@@ -245,14 +251,11 @@ int main(int argc, char *argv[]){
         // on assume que le chemin du fichier est dans le 1er paramètre
         fp = fopen(argv[1], "r");
         if(fp == NULL){
-            printf("Erreur dans le fichier.\n");
+            printf("Erreur dans l'ouverture du fichier de jeu.\n");
             exit(66); //no input - voir man sysexits
         }
         // lecture du fichier
         char* l = getCoups(fp);
-        for(int i = 0; i<60 ; i++){
-            printf(" %c ", *(l+i));
-        }
         
     }
 
@@ -270,8 +273,11 @@ int main(int argc, char *argv[]){
 
     maj_affichage();
 
-    printf("Ecrire \"fin\" pour finir la partie.\n");
-    printf("C'est parti !\n");
+    if (jeu.inputMode == 1){
+    	printf("Ecrire \"fin\" pour finir la partie.\n");
+    	printf("C'est parti !\n");
+    }
+    
 
   
     jeu.couleurCourante = black;
@@ -284,6 +290,21 @@ int main(int argc, char *argv[]){
         // insertion clavier
         char newMove[5];
         char poub;
+
+        // ouverture du fichier de sortie
+        char filename[257];
+        FILE *fs;
+
+        printf("Nom de fichier de sortie : ");
+        fgets(filename, 257, stdin);
+        filename[257] = '\0';
+
+        fs = fopen(filename, "w+");
+        if(fs == NULL){
+        	printf("\nErreur de fichier de sortie !\n\n");
+        	exit(66);
+        }
+
         do {
             newMove[0] = ' ';
             newMove[1] = ' ';
@@ -300,8 +321,17 @@ int main(int argc, char *argv[]){
             // move ou fin
             fgets(newMove, 15, stdin);
             newMove[4]='\0';
-            printf("Newmove = %s-", newMove);
+            #ifdef DEBUG
+            	printf("Newmove = %s-", newMove);
+			#endif	
             printf("\n");
+
+            //ecriture dans le fichier (sauf fin)
+            if(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n'){
+            	fprintf(fs, newMove);
+            	fprintf(fs, "\n");
+            }
+            
 
         } while(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n');
         
