@@ -18,7 +18,7 @@ typedef struct {
     int inputMode;
     couleur_t couleurCourante;
     FILE *outputFile;
-    int fileProvided = 0;
+    int fileProvided;
 } game_t;
 
 typedef struct {
@@ -236,17 +236,18 @@ void maj_affichage(){
 }
 
 void executer_tests(){
-	printf("=== Début des tests ===\n");
+    printf("=== Début des tests ===\n");
 
-		
 
-	printf("=== Fin des tests ===\n");
+
+    printf("=== Fin des tests ===\n");
 }
 
 int main(int argc, char *argv[]){
     FILE *fp;
 
     game_t jeu;
+    jeu.fileProvided = 0;
 
     if(argc < 2){
         printf("Pas de fichier de jeu fourni : passage en mode clavier\n");
@@ -273,6 +274,8 @@ int main(int argc, char *argv[]){
     //get_case(e, 0, 0, c);
 
     //t_coup *listeCoup;
+
+    executer_tests();
 
     printf("Nouvel échiquier :\n");
 
