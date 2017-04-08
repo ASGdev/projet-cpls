@@ -1,4 +1,4 @@
-#include "pieces.h"
+#include "prototype.h"
 
 piece_t piece_de_lettre (char piece){
 	switch (piece){

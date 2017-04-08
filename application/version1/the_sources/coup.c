@@ -1,6 +1,4 @@
-#include "pieces.h"
-#include "echiquier.h"
-#include "coup.h"
+#include "prototype.h"
 
 int creer_coup(coup_t *liste, char c[255], char move[4]){
     // move pas sur la même case
