@@ -10,7 +10,6 @@ typedef enum couleur_t { white = 0, black = 1} couleur_t;
 
 typedef uint32_t echiquier_t[8];
 
-
 typedef uint32_t case_t;
 
 // 1 means user input
@@ -54,6 +53,7 @@ piece_t piece_de_lettre(char lettre){
             case 'B' :
                 break;
             default :
+                return (MARK);
 
                 break;
         }
@@ -72,10 +72,15 @@ piece_t piece_de_lettre(char lettre){
                 break;
             default :
                 break;
+                return (MARK);
         }
     #endif
+    return (MARK);
 }
 
+char lettre_de_piece(piece_t p){
+    return 'a';
+}
 
 
 
@@ -170,8 +175,8 @@ void set_case(echiquier_t *e, int l, int c, case_t v){
     #endif
 }
 
-void get_case(echiquier_t *e, int l, int c, case_t* v){
-    int w = (*e[0] & (15 << (c * 4)));
+void get_case(echiquier_t e, int l, int c, case_t* v){
+    int w = (e[l] & (15 << (c * 4)));
     w =  w >> (c * 4);
     printf("Case content : %08x\n", w);
 }
@@ -192,7 +197,7 @@ char colonne_de_indice(int i){
     return i+'a';
 }
 
-int char_line_valide(char l){
+int char_ligne_valide(char l){
     return (l-'a'>-1 && l-'a'<8);
 }
 
@@ -202,17 +207,39 @@ int char_colonne_valide(char l){
 
 /* Create move */
 int creer_coup(coup_t *liste, char c[255], char move[4]){
-    // // move pas sur la même case
-    // if (move[0] == move[2] && move[1] == move[3]){
-    //     return -1;
-    // }
+// move pas sur la même case
+    if(move[0] == move[2] && move[1] == move[3]){
+        return -1;
+    }
 
-    // //get couleur case et vérifier que ce coup est de couleur adverse que le coup précédent
+    int coldep = indice_de_colonne(move[0]);
+    int ligdep = indice_de_colonne(move[1]);
+    int colarr = indice_de_colonne(move[2]);
+    int ligarr = indice_de_colonne(move[3]);
 
-    // // le coup est validé
-    // coup_t *coup = malloc(sizeof(coup_t));
-    // liste->numeroCourant++;
-    // //*coup.numero = *liste->numeroCourant;
+    // if (coldep<0 || ligdep<0 || colarr<0 || ligarr<0 || coldep>7 || ligdep>7 || colarr>7 || ligarr>7){ //Coup pas dans l'échiquier
+    if(char_ligne_valide(ligdep)!=1||char_ligne_valide(ligarr!=1)||char_colonne_valide(coldep)!=1||char_colonne_valide(colarr)!=1){ 
+        return -1;
+    }
+
+    case_t casecour;
+    echiquier_t ecourant;
+
+    get_case(ecourant, ligarr, colarr, &casecour);
+
+    piece_t piececour = piece_t_de_case_t(casecour);
+    couleur_t couleurcour = couleur_t_de_case_t(casecour);
+
+
+    if (piececour!=EMPTY && couleur_t_de_case_t(casecour)==liste->joueur){ // case non vide et pièce de même couleur donc erreur
+        return -1;
+    } else if((piececour!=EMPTY && couleur_t_de_case_t(casecour)!=liste->joueur) || piececour==EMPTY){
+        *c='D';
+        case_t newcase = case_t_de_pc(piececour,liste->joueur);
+        //set_case(*ecourant,ligarr, colarr, newcase);
+    }
+
+    return 0;
 }
 
 
@@ -220,7 +247,7 @@ void afficher_octet(char p, affiche_func_param_t f){
     putchar(p);
 }
 
-void maj_affichage(){
+void maj_affichage(echiquier_t e){
     definir_coloris(BSN, WHITE, BLACK);
     definir_coloris(NSB, BLACK, WHITE);
     FILE *fout = stdout;
@@ -233,22 +260,43 @@ void maj_affichage(){
         putchar(i+1+'0');
         putchar(' ');
         for(int j = 0; j < 8; j++){
-            // colonnes
-            dessiner_case(BSN, ' ', afficher_octet, u);
-            dessiner_case(BSN, 'p', afficher_octet, u);
-            dessiner_case(BSN, ' ', afficher_octet, u);
+            // colonne
+            case_t casecour;
+            get_case(e, i, j, &casecour);
+            piece_t piececour = piece_t_de_case_t(casecour);
+            char cpiececour = lettre_de_piece(piececour);
+            if (j%2 == 0){
+                if (i%2 == 0){
+                    dessiner_case(NSB, ' ', afficher_octet, u);
+                    dessiner_case(NSB, cpiececour, afficher_octet, u);
+                    dessiner_case(NSB, ' ', afficher_octet, u);
+                }else{
+                    dessiner_case(BSN, ' ', afficher_octet, u);
+                    dessiner_case(BSN, cpiececour, afficher_octet, u);
+                    dessiner_case(BSN, ' ', afficher_octet, u);
+                }
+            }else{
+                if (i%2 == 1){
+                    dessiner_case(NSB, ' ', afficher_octet, u);
+                    dessiner_case(NSB, cpiececour, afficher_octet, u);
+                    dessiner_case(NSB, ' ', afficher_octet, u);
+                }else{
+                    dessiner_case(BSN, ' ', afficher_octet, u);
+                    dessiner_case(BSN, cpiececour, afficher_octet, u);
+                    dessiner_case(BSN, ' ', afficher_octet, u);
+                }
+            }
         }
         printf("\n\n");
     }
-
 
 }
 
 void executer_tests(){
     printf("=== Début des tests ===\n");
-    printf("Ligne a valide %d\n", char_line_valide('a'));
-    printf("Ligne h valide %d\n", char_line_valide('h'));
-    printf("Ligne i valide %d\n", char_line_valide('i'));
+    printf("Ligne a valide %d\n", char_ligne_valide('a'));
+    printf("Ligne h valide %d\n", char_ligne_valide('h'));
+    printf("Ligne i valide %d\n", char_ligne_valide('i'));
 
     printf("Colonne 0 valide %d\n", char_colonne_valide('0'));
     printf("Colonne 7 valide %d\n", char_colonne_valide('7'));
@@ -310,9 +358,6 @@ int main(int argc, char *argv[]){
 
     executer_tests();
 
-    printf("Nouvel échiquier :\n");
-
-    maj_affichage();
 
     if (jeu.inputMode == 1){
     	printf("Ecrire \"fin\" pour finir la partie.\n");
@@ -321,7 +366,6 @@ int main(int argc, char *argv[]){
 
 
     jeu.couleurCourante = black;
-
 
     if(jeu.inputMode == 0){
         // liste
@@ -337,12 +381,24 @@ int main(int argc, char *argv[]){
             coup_t *c;
             creer_coup(c, "", move);
         }
+        printf("Fin du fichier. Voulez-vous continuer ? (oui : o)");
 
+        char answer;
+        answer = getchar();
+        // clean retour chariot
+        char p = getchar();
+        if(answer == 'o'){
+            jeu.inputMode = 1;
+            #ifdef DEBUG
+                printf("Answer : %c\n", answer);
+            #endif
+            goto continuer;
+        }
 
     } else {
         // insertion clavier
+        continuer: printf("Passage en mode clavier\n");
         char newMove[5];
-        char poub;
 
         // ouverture du fichier de sortie
         char filename[257];
