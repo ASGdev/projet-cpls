@@ -56,14 +56,27 @@ void maj_affichage(echiquier_t echiquier){
 }
 
 int main(int argc, char *argv[]){
+	#if FR
+		printf("Mode Francais\n");
+	#else
+		printf("Mode Anglais\n");
+	#endif
+
+	#if DEBUG
+		printf("Mode debug actif\n");
+	#else
+		printf("\n");
+	#endif
 
     coup_t echiquier = initechequier();
     maj_affichage(echiquier.courant);
 
 
     FILE *fp;
+    char *l;
 
     game_t jeu;
+    jeu.fileProvided = 0;
 
     if(argc < 2){
         printf("Pas de fichier de jeu fourni : passage en mode clavier\n");
@@ -77,7 +90,9 @@ int main(int argc, char *argv[]){
             exit(66); //no input - voir man sysexits
         }
         // lecture du fichier
-        // char* l = getCoups(fp);
+        l = getCoups(fp);
+        jeu.fileProvided = 1;
+        jeu.inputMode = 0;
     }
 
     if (jeu.inputMode == 1){
@@ -85,14 +100,55 @@ int main(int argc, char *argv[]){
     	printf("C'est parti !\n");
     }
 
-    jeu.couleurCourante = NOIR;
-
-
     if(jeu.inputMode == 0){
         // liste
+        int i = 0;
+        char move[4];
+        while(l[i] != '\0'){
+            move[0] = l[i];
+            move[1] = l[i+1];
+            move[2] = l[i+2];
+            move[3] = l[i+3];
+            i+=4;
+
+            if(jeu.couleurCourante == BLANC){
+                printf("Joueur Noir joue : ");
+                jeu.couleurCourante = NOIR;
+            } else {
+                printf("Joueur Blanc joue : ");
+                jeu.couleurCourante = BLANC;
+            }
+            // move ou fin
+            int sortie = 0;
+            while(sortie != 1){
+	            printf("\n");
+	            char comm [255];
+	            strcpy(comm, "newcoup");
+	            sortie = creer_coup(&echiquier, comm, move, jeu.couleurCourante);
+                if(sortie != 1){
+                	printf("Veuillez rejouer : ");
+                }
+            }
+        }
+    	maj_affichage(echiquier.courant);
+        printf("Fin du fichier. Voulez-vous continuer (oui : o, fin : autre) ? ");
+
+        char answer;
+        answer = getchar();
+        // clean retour chariot
+        char p = getchar();
+        if(answer == 'o'){
+            jeu.inputMode = 1;
+            #ifdef DEBUG
+                printf("Answer : %c\n", answer);
+            #endif
+            // saute sur partie insertion clavier
+            goto continuer;
+        }
 
     } else {
-        // insertion clavier
+		// insertion clavier
+        continuer: printf("Passage en mode clavier\n");
         char newMove[5];
         // char poub;
 

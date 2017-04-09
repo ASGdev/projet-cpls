@@ -65,6 +65,7 @@ typedef struct {
     int inputMode;
     couleur_t couleurCourante;
     FILE *outputFile;
+    int fileProvided;
 } game_t;
 
 typedef struct{
