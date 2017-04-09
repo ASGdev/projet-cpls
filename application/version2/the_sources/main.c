@@ -198,48 +198,50 @@ char colonne_de_indice(int i){
 }
 
 int char_ligne_valide(char l){
-    return (l-'a'>-1 && l-'a'<8);
+    printf("lv : %d\n", (l-'a'>-1 && l-'a'<8));
+    return (l-'0'>-1 && l-'0'<8);
 }
 
 int char_colonne_valide(char l){
-    return (l-'0'>-1 && l-'0'<8);
+    printf("cv : %d\n", (l-'a'>-1 && l-'a'<8));
+    return (l-'a'>-1 && l-'a'<8);
 }
 
 /* Create move */
 int creer_coup(coup_t *liste, char c[255], char move[4]){
 // move pas sur la même case
-    if(move[0] == move[2] && move[1] == move[3]){
-        return -1;
-    }
+    // if(move[0] == move[2] && move[1] == move[3]){
+    //     return -1;
+    // }
 
-    int coldep = indice_de_colonne(move[0]);
-    int ligdep = indice_de_colonne(move[1]);
-    int colarr = indice_de_colonne(move[2]);
-    int ligarr = indice_de_colonne(move[3]);
+    // int coldep = indice_de_colonne(move[0]);
+    // int ligdep = indice_de_colonne(move[1]);
+    // int colarr = indice_de_colonne(move[2]);
+    // int ligarr = indice_de_colonne(move[3]);
 
-    // if (coldep<0 || ligdep<0 || colarr<0 || ligarr<0 || coldep>7 || ligdep>7 || colarr>7 || ligarr>7){ //Coup pas dans l'échiquier
-    if(char_ligne_valide(ligdep)!=1||char_ligne_valide(ligarr!=1)||char_colonne_valide(coldep)!=1||char_colonne_valide(colarr)!=1){ 
-        return -1;
-    }
+    // // if (coldep<0 || ligdep<0 || colarr<0 || ligarr<0 || coldep>7 || ligdep>7 || colarr>7 || ligarr>7){ //Coup pas dans l'échiquier
+    // if(char_ligne_valide(ligdep)!=1||char_ligne_valide(ligarr!=1)||char_colonne_valide(coldep)!=1||char_colonne_valide(colarr)!=1){ 
+    //     return -1;
+    // }
 
-    case_t casecour;
-    echiquier_t ecourant;
+    // case_t casecour;
+    // echiquier_t ecourant;
 
-    get_case(ecourant, ligarr, colarr, &casecour);
+    // get_case(ecourant, ligarr, colarr, &casecour);
 
-    piece_t piececour = piece_t_de_case_t(casecour);
-    couleur_t couleurcour = couleur_t_de_case_t(casecour);
+    // piece_t piececour = piece_t_de_case_t(casecour);
+    // couleur_t couleurcour = couleur_t_de_case_t(casecour);
 
 
-    if (piececour!=EMPTY && couleur_t_de_case_t(casecour)==liste->joueur){ // case non vide et pièce de même couleur donc erreur
-        return -1;
-    } else if((piececour!=EMPTY && couleur_t_de_case_t(casecour)!=liste->joueur) || piececour==EMPTY){
-        *c='D';
-        case_t newcase = case_t_de_pc(piececour,liste->joueur);
-        //set_case(*ecourant,ligarr, colarr, newcase);
-    }
+    // if (piececour!=EMPTY && couleur_t_de_case_t(casecour)==liste->joueur){ // case non vide et pièce de même couleur donc erreur
+    //     return -1;
+    // } else if((piececour!=EMPTY && couleur_t_de_case_t(casecour)!=liste->joueur) || piececour==EMPTY){
+    //     *c='D';
+    //     case_t newcase = case_t_de_pc(piececour,liste->joueur);
+    //     //set_case(*ecourant,ligarr, colarr, newcase);
+    // }
 
-    return 0;
+    // return 0;
 }
 
 
@@ -381,7 +383,7 @@ int main(int argc, char *argv[]){
             coup_t *c;
             creer_coup(c, "", move);
         }
-        printf("Fin du fichier. Voulez-vous continuer ? (oui : o)");
+        printf("Fin du fichier. Voulez-vous continuer (oui : o, fin : autre) ? ");
 
         char answer;
         answer = getchar();
@@ -392,6 +394,7 @@ int main(int argc, char *argv[]){
             #ifdef DEBUG
                 printf("Answer : %c\n", answer);
             #endif
+            // saute sur partie insertion clavier
             goto continuer;
         }
 
@@ -427,11 +430,22 @@ int main(int argc, char *argv[]){
                 printf("Joueur Blanc joue : ");
                 jeu.couleurCourante = white;
             }
-            // move ou fin
+            // move ou fin et clean entree
             fgets(newMove, 15, stdin);
             newMove[4]='\0';
+
+            int correct = 0;
+            if(char_ligne_valide(newMove[0])){
+                if(char_colonne_valide(newMove[1])){
+                    if(char_ligne_valide(newMove[2])){
+                        if(char_colonne_valide(newMove[3])){
+                            correct = 1;
+                        }
+                    }
+                }
+            }
             #ifdef DEBUG
-            	printf("Nouveau mouvement = %s-", newMove);
+            	printf("Nouveau mouvement = %s %d-", newMove, correct);
 			#endif
             printf("\n");
 
