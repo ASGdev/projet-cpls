@@ -1,0 +1,234 @@
+\hypertarget{echiquier_8c}{}\section{the\+\_\+sources/echiquier.c File Reference}
+\label{echiquier_8c}\index{the\+\_\+sources/echiquier.\+c@{the\+\_\+sources/echiquier.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}prototype.\+h\char`\"{}}\\*
+Include dependency graph for echiquier.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcoup__t}{coup\+\_\+t} \hyperlink{echiquier_8c_a316106532e02495a5eb6566d3c409b5c}{initechequier} ()
+\item 
+\hyperlink{structcase__t}{case\+\_\+t} \hyperlink{echiquier_8c_a9a355d37e6a9ad3d64d9546c6dc79f4c}{case\+\_\+t\+\_\+de\+\_\+pc} (\hyperlink{prototype_8h_ab9be55f539b97c45fb9f57efded733c2}{piece\+\_\+t} piece, \hyperlink{prototype_8h_a2fc0928aba15295ee980b903ed92f23f}{couleur\+\_\+t} couleur)
+\item 
+\hyperlink{prototype_8h_ab9be55f539b97c45fb9f57efded733c2}{piece\+\_\+t} \hyperlink{echiquier_8c_a38e18516d6afe1ebb477c9ab3d4f8ae9}{piece\+\_\+t\+\_\+de\+\_\+case\+\_\+t} (\hyperlink{structcase__t}{case\+\_\+t} caset)
+\item 
+\hyperlink{prototype_8h_a2fc0928aba15295ee980b903ed92f23f}{couleur\+\_\+t} \hyperlink{echiquier_8c_a1175e5f97980f011a5cc5b7b118db340}{couleur\+\_\+t\+\_\+de\+\_\+case\+\_\+t} (\hyperlink{structcase__t}{case\+\_\+t} caset)
+\item 
+\hyperlink{structechiquier__t}{echiquier\+\_\+t} \hyperlink{echiquier_8c_ac03518d44775ea2afcc1d76448049835}{set\+\_\+case} (\hyperlink{structechiquier__t}{echiquier\+\_\+t} echec, int ligne, int colonne, \hyperlink{structcase__t}{case\+\_\+t} newcase)
+\item 
+\hyperlink{structcase__t}{case\+\_\+t} \hyperlink{echiquier_8c_a4d94f72830cc333bd7949e835773cc8c}{get\+\_\+case} (\hyperlink{structechiquier__t}{echiquier\+\_\+t} echec, int ligne, int colonne, \hyperlink{structcase__t}{case\+\_\+t} newcase)
+\item 
+int \hyperlink{echiquier_8c_a9d3987b42365e81aea2429762e14ac11}{indice\+\_\+de\+\_\+ligne} (char l)
+\item 
+char \hyperlink{echiquier_8c_a4244c99027cc8fa51ab06415fcbefc70}{ligne\+\_\+de\+\_\+indice} (int i)
+\item 
+int \hyperlink{echiquier_8c_ab0ccc2d0505ad4f826a24b95c700f21d}{indice\+\_\+de\+\_\+colonne} (char l)
+\item 
+char \hyperlink{echiquier_8c_aa981eaa267315d86938379722057cf32}{colonne\+\_\+de\+\_\+indice} (int i)
+\item 
+int \hyperlink{echiquier_8c_ac2794b9a74fb8a3608962cc1f05f752d}{char\+\_\+ligne\+\_\+valide} (char l)
+\item 
+int \hyperlink{echiquier_8c_a25766802757cb007fd2c6b9c228c339c}{char\+\_\+colonne\+\_\+valide} (char l)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{echiquier.\+c@{echiquier.\+c}!case\+\_\+t\+\_\+de\+\_\+pc@{case\+\_\+t\+\_\+de\+\_\+pc}}
+\index{case\+\_\+t\+\_\+de\+\_\+pc@{case\+\_\+t\+\_\+de\+\_\+pc}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{case\+\_\+t\+\_\+de\+\_\+pc(piece\+\_\+t piece, couleur\+\_\+t couleur)}{case_t_de_pc(piece_t piece, couleur_t couleur)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf case\+\_\+t} case\+\_\+t\+\_\+de\+\_\+pc (
+\begin{DoxyParamCaption}
+\item[{{\bf piece\+\_\+t}}]{piece, }
+\item[{{\bf couleur\+\_\+t}}]{couleur}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a9a355d37e6a9ad3d64d9546c6dc79f4c}{}\label{echiquier_8c_a9a355d37e6a9ad3d64d9546c6dc79f4c}
+
+\begin{DoxyParams}{Parameters}
+{\em piece} & \+: une piece de type piece\+\_\+t \\
+\hline
+{\em couleur} & \+: une couleur pour la piece de type couleur\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une caset\+\_\+t contenant la couleur et la piece donné en paramètre 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!char\+\_\+colonne\+\_\+valide@{char\+\_\+colonne\+\_\+valide}}
+\index{char\+\_\+colonne\+\_\+valide@{char\+\_\+colonne\+\_\+valide}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{char\+\_\+colonne\+\_\+valide(char l)}{char_colonne_valide(char l)}}]{\setlength{\rightskip}{0pt plus 5cm}int char\+\_\+colonne\+\_\+valide (
+\begin{DoxyParamCaption}
+\item[{char}]{l}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a25766802757cb007fd2c6b9c228c339c}{}\label{echiquier_8c_a25766802757cb007fd2c6b9c228c339c}
+
+\begin{DoxyParams}{Parameters}
+{\em l} & \+: char indiquant une colonne de l\textquotesingle{}échiquier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si la colonne donnée est valide, 0 sinon 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!char\+\_\+ligne\+\_\+valide@{char\+\_\+ligne\+\_\+valide}}
+\index{char\+\_\+ligne\+\_\+valide@{char\+\_\+ligne\+\_\+valide}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{char\+\_\+ligne\+\_\+valide(char l)}{char_ligne_valide(char l)}}]{\setlength{\rightskip}{0pt plus 5cm}int char\+\_\+ligne\+\_\+valide (
+\begin{DoxyParamCaption}
+\item[{char}]{l}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_ac2794b9a74fb8a3608962cc1f05f752d}{}\label{echiquier_8c_ac2794b9a74fb8a3608962cc1f05f752d}
+
+\begin{DoxyParams}{Parameters}
+{\em l} & \+: char indiquant une ligne donnée de l\textquotesingle{}échiquier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si la ligne donnée est valide, 0 sinon 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!colonne\+\_\+de\+\_\+indice@{colonne\+\_\+de\+\_\+indice}}
+\index{colonne\+\_\+de\+\_\+indice@{colonne\+\_\+de\+\_\+indice}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{colonne\+\_\+de\+\_\+indice(int i)}{colonne_de_indice(int i)}}]{\setlength{\rightskip}{0pt plus 5cm}char colonne\+\_\+de\+\_\+indice (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_aa981eaa267315d86938379722057cf32}{}\label{echiquier_8c_aa981eaa267315d86938379722057cf32}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & \+: entier correspond à une colonne \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char correspondant à l\textquotesingle{}entier donné pour la colonne 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!couleur\+\_\+t\+\_\+de\+\_\+case\+\_\+t@{couleur\+\_\+t\+\_\+de\+\_\+case\+\_\+t}}
+\index{couleur\+\_\+t\+\_\+de\+\_\+case\+\_\+t@{couleur\+\_\+t\+\_\+de\+\_\+case\+\_\+t}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{couleur\+\_\+t\+\_\+de\+\_\+case\+\_\+t(case\+\_\+t caset)}{couleur_t_de_case_t(case_t caset)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf couleur\+\_\+t} couleur\+\_\+t\+\_\+de\+\_\+case\+\_\+t (
+\begin{DoxyParamCaption}
+\item[{{\bf case\+\_\+t}}]{caset}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a1175e5f97980f011a5cc5b7b118db340}{}\label{echiquier_8c_a1175e5f97980f011a5cc5b7b118db340}
+
+\begin{DoxyParams}{Parameters}
+{\em caset} & \+: une \hyperlink{structcase__t}{case\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la couleur contenu dans la \hyperlink{structcase__t}{case\+\_\+t} donnée en paramètre 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!get\+\_\+case@{get\+\_\+case}}
+\index{get\+\_\+case@{get\+\_\+case}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{get\+\_\+case(echiquier\+\_\+t echec, int ligne, int colonne, case\+\_\+t newcase)}{get_case(echiquier_t echec, int ligne, int colonne, case_t newcase)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf case\+\_\+t} get\+\_\+case (
+\begin{DoxyParamCaption}
+\item[{{\bf echiquier\+\_\+t}}]{echec, }
+\item[{int}]{ligne, }
+\item[{int}]{colonne, }
+\item[{{\bf case\+\_\+t}}]{newcase}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a4d94f72830cc333bd7949e835773cc8c}{}\label{echiquier_8c_a4d94f72830cc333bd7949e835773cc8c}
+
+\begin{DoxyParams}{Parameters}
+{\em ehec} & \+: un échiquier \\
+\hline
+{\em ligne} & \+: une ligne \\
+\hline
+{\em colonne} & \+: une colonne \\
+\hline
+{\em newcase} & \+: une \hyperlink{structcase__t}{case\+\_\+t} vide \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la \hyperlink{structcase__t}{case\+\_\+t} donnée en paramètre avec le contenu de la case qu\textquotesingle{}il y a au coordonnées données 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!indice\+\_\+de\+\_\+colonne@{indice\+\_\+de\+\_\+colonne}}
+\index{indice\+\_\+de\+\_\+colonne@{indice\+\_\+de\+\_\+colonne}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{indice\+\_\+de\+\_\+colonne(char l)}{indice_de_colonne(char l)}}]{\setlength{\rightskip}{0pt plus 5cm}int indice\+\_\+de\+\_\+colonne (
+\begin{DoxyParamCaption}
+\item[{char}]{l}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_ab0ccc2d0505ad4f826a24b95c700f21d}{}\label{echiquier_8c_ab0ccc2d0505ad4f826a24b95c700f21d}
+
+\begin{DoxyParams}{Parameters}
+{\em l} & \+: char indiquant une colonne de l\textquotesingle{}échiquier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}entier correspondant au char de la colonne 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!indice\+\_\+de\+\_\+ligne@{indice\+\_\+de\+\_\+ligne}}
+\index{indice\+\_\+de\+\_\+ligne@{indice\+\_\+de\+\_\+ligne}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{indice\+\_\+de\+\_\+ligne(char l)}{indice_de_ligne(char l)}}]{\setlength{\rightskip}{0pt plus 5cm}int indice\+\_\+de\+\_\+ligne (
+\begin{DoxyParamCaption}
+\item[{char}]{l}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a9d3987b42365e81aea2429762e14ac11}{}\label{echiquier_8c_a9d3987b42365e81aea2429762e14ac11}
+
+\begin{DoxyParams}{Parameters}
+{\em l} & \+: char indiquant une ligne de l\textquotesingle{}échiquier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}entier correspondant au char de la ligne 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!initechequier@{initechequier}}
+\index{initechequier@{initechequier}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{initechequier()}{initechequier()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf coup\+\_\+t} initechequier (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a316106532e02495a5eb6566d3c409b5c}{}\label{echiquier_8c_a316106532e02495a5eb6566d3c409b5c}
+\begin{DoxyReturn}{Returns}
+\hyperlink{structcoup__t}{coup\+\_\+t} contenant l\textquotesingle{}échiquier initialisé le numero à 0, la couleur N\+O\+IR, aucun prochain coup, et commme commentaire \char`\"{}init\char`\"{} 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!ligne\+\_\+de\+\_\+indice@{ligne\+\_\+de\+\_\+indice}}
+\index{ligne\+\_\+de\+\_\+indice@{ligne\+\_\+de\+\_\+indice}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{ligne\+\_\+de\+\_\+indice(int i)}{ligne_de_indice(int i)}}]{\setlength{\rightskip}{0pt plus 5cm}char ligne\+\_\+de\+\_\+indice (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a4244c99027cc8fa51ab06415fcbefc70}{}\label{echiquier_8c_a4244c99027cc8fa51ab06415fcbefc70}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & \+: entier correspond à une ligne \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char correspondant à l\textquotesingle{}entier donné pour la ligne 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!piece\+\_\+t\+\_\+de\+\_\+case\+\_\+t@{piece\+\_\+t\+\_\+de\+\_\+case\+\_\+t}}
+\index{piece\+\_\+t\+\_\+de\+\_\+case\+\_\+t@{piece\+\_\+t\+\_\+de\+\_\+case\+\_\+t}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{piece\+\_\+t\+\_\+de\+\_\+case\+\_\+t(case\+\_\+t caset)}{piece_t_de_case_t(case_t caset)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf piece\+\_\+t} piece\+\_\+t\+\_\+de\+\_\+case\+\_\+t (
+\begin{DoxyParamCaption}
+\item[{{\bf case\+\_\+t}}]{caset}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_a38e18516d6afe1ebb477c9ab3d4f8ae9}{}\label{echiquier_8c_a38e18516d6afe1ebb477c9ab3d4f8ae9}
+
+\begin{DoxyParams}{Parameters}
+{\em caset} & \+: une \hyperlink{structcase__t}{case\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la piece contenu dans la \hyperlink{structcase__t}{case\+\_\+t} donnée en paramètre 
+\end{DoxyReturn}
+\index{echiquier.\+c@{echiquier.\+c}!set\+\_\+case@{set\+\_\+case}}
+\index{set\+\_\+case@{set\+\_\+case}!echiquier.\+c@{echiquier.\+c}}
+\subsubsection[{\texorpdfstring{set\+\_\+case(echiquier\+\_\+t echec, int ligne, int colonne, case\+\_\+t newcase)}{set_case(echiquier_t echec, int ligne, int colonne, case_t newcase)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf echiquier\+\_\+t} set\+\_\+case (
+\begin{DoxyParamCaption}
+\item[{{\bf echiquier\+\_\+t}}]{echec, }
+\item[{int}]{ligne, }
+\item[{int}]{colonne, }
+\item[{{\bf case\+\_\+t}}]{newcase}
+\end{DoxyParamCaption}
+)}\hypertarget{echiquier_8c_ac03518d44775ea2afcc1d76448049835}{}\label{echiquier_8c_ac03518d44775ea2afcc1d76448049835}
+
+\begin{DoxyParams}{Parameters}
+{\em ehec} & \+: un échiquier \\
+\hline
+{\em ligne} & \+: une ligne \\
+\hline
+{\em colonne} & \+: une colonne \\
+\hline
+{\em newcase} & \+: une \hyperlink{structcase__t}{case\+\_\+t} à ajoutée à l\textquotesingle{}échiquier mis en paramètre \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}échiquier avec la nouvelle case donnée en paramètre 
+\end{DoxyReturn}

@@ -1,0 +1,52 @@
+\hypertarget{affichage_8c}{}\section{the\+\_\+sources/affichage.c File Reference}
+\label{affichage_8c}\index{the\+\_\+sources/affichage.\+c@{the\+\_\+sources/affichage.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}../the\+\_\+headers/vt100.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}prototype.\+h\char`\"{}}\\*
+Include dependency graph for affichage.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{affichage_8c_a9e76b2e914e53176fa212081d452a8a0}{afficher\+\_\+octet} (char p, \hyperlink{fonc__carac_8h_afd4ef61f124166f33512d47437ab24e5}{affiche\+\_\+func\+\_\+param\+\_\+t} f)
+\item 
+void \hyperlink{affichage_8c_a39d6077f03d3f11f86e079aea3293097}{maj\+\_\+affichage} (\hyperlink{structechiquier__t}{echiquier\+\_\+t} echiquier)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{affichage.\+c@{affichage.\+c}!afficher\+\_\+octet@{afficher\+\_\+octet}}
+\index{afficher\+\_\+octet@{afficher\+\_\+octet}!affichage.\+c@{affichage.\+c}}
+\subsubsection[{\texorpdfstring{afficher\+\_\+octet(char p, affiche\+\_\+func\+\_\+param\+\_\+t f)}{afficher_octet(char p, affiche_func_param_t f)}}]{\setlength{\rightskip}{0pt plus 5cm}void afficher\+\_\+octet (
+\begin{DoxyParamCaption}
+\item[{char}]{p, }
+\item[{{\bf affiche\+\_\+func\+\_\+param\+\_\+t}}]{f}
+\end{DoxyParamCaption}
+)}\hypertarget{affichage_8c_a9e76b2e914e53176fa212081d452a8a0}{}\label{affichage_8c_a9e76b2e914e53176fa212081d452a8a0}
+
+\begin{DoxyParams}{Parameters}
+{\em p} & \+: char piece \\
+\hline
+{\em f} & \+: fonction qui permet l\textquotesingle{}affichage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: la char est converti en une donnée utilisable par la fonction affichage Afficher\+\_\+octet est la fonction qui gère la conversion de la pièce en une donnée utilisable par la fonction d\textquotesingle{}affichage à laquelle quelle elle délègue l\textquotesingle{}affichage de la pièce (fonction de type affiche\+\_\+func\+\_\+param\+\_\+t donnée en paramètre). Ici, on utilise directement la fonction putchar() qui permet d\textquotesingle{}afficher le caractère sur la sortie standard (cette fonction connaît déjà le descripteur de fichier correspondant, ce qui nous facilite la tâche). 
+\end{DoxyReturn}
+\index{affichage.\+c@{affichage.\+c}!maj\+\_\+affichage@{maj\+\_\+affichage}}
+\index{maj\+\_\+affichage@{maj\+\_\+affichage}!affichage.\+c@{affichage.\+c}}
+\subsubsection[{\texorpdfstring{maj\+\_\+affichage(echiquier\+\_\+t echiquier)}{maj_affichage(echiquier_t echiquier)}}]{\setlength{\rightskip}{0pt plus 5cm}void maj\+\_\+affichage (
+\begin{DoxyParamCaption}
+\item[{{\bf echiquier\+\_\+t}}]{echiquier}
+\end{DoxyParamCaption}
+)}\hypertarget{affichage_8c_a39d6077f03d3f11f86e079aea3293097}{}\label{affichage_8c_a39d6077f03d3f11f86e079aea3293097}
+
+\begin{DoxyParams}{Parameters}
+{\em echiquier} & \+: un échiquier à afficher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+l\textquotesingle{}afficher affiché dans le terminal 
+\end{DoxyReturn}

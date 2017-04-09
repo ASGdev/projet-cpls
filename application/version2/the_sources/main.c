@@ -365,7 +365,7 @@ void executer_tests(){
 }
 
 /**
- * 
+ *
  * \param argc : nombre d'argument (non utilisé par l'utilisateur)
  * \param argv : 1 argument, le fichier de jeu en entrée
  * \return 0 si aucune erreur ou sortie utilisateur par CTRL-D

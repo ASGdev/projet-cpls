@@ -2,6 +2,17 @@
 #include <stdio.h>
 #include "prototype.h"
 
+
+/**
+ *
+ * \param *liste : Liste de coup, contenant l'échiquier courant et le coup courant
+ * \param c : Commentaire
+ * \param move : Les positions
+ * \param coulJoueur : couleur du joueur courant
+ * \return 1 si aucune erreur n'a été rencontré
+ * \return inférieur à 1 si problème a été rencontré
+ */
+
 int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
     // move pas sur la même case
 
@@ -65,6 +76,12 @@ int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
     return -10;
 }
 
+
+/**
+ *
+ * \param *fp : fichier à lire contenant les coup à jouer
+ * \return char*, la liste des coups à jouer
+ */
 
 char* getCoups(FILE *fp){
     /* on insère les coups dans une variable "tampon". Permet notamment de libérer le fichier et un accès plus rapide car en mémoire */

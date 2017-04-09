@@ -1,0 +1,58 @@
+\hypertarget{coup_8c}{}\section{the\+\_\+sources/coup.c File Reference}
+\label{coup_8c}\index{the\+\_\+sources/coup.\+c@{the\+\_\+sources/coup.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}prototype.\+h\char`\"{}}\\*
+Include dependency graph for coup.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{coup_8c_a945ba1d8f638fa8f58b2989c9fa53a18}{creer\+\_\+coup} (\hyperlink{structcoup__t}{coup\+\_\+t} $\ast$liste, char c\mbox{[}255\mbox{]}, char move\mbox{[}4\mbox{]}, \hyperlink{prototype_8h_a2fc0928aba15295ee980b903ed92f23f}{couleur\+\_\+t} coul\+Joueur)
+\item 
+char $\ast$ \hyperlink{coup_8c_a61186c1daa416ac01b93dee2e53b5090}{get\+Coups} (F\+I\+LE $\ast$fp)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{coup.\+c@{coup.\+c}!creer\+\_\+coup@{creer\+\_\+coup}}
+\index{creer\+\_\+coup@{creer\+\_\+coup}!coup.\+c@{coup.\+c}}
+\subsubsection[{\texorpdfstring{creer\+\_\+coup(coup\+\_\+t $\ast$liste, char c[255], char move[4], couleur\+\_\+t coul\+Joueur)}{creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur)}}]{\setlength{\rightskip}{0pt plus 5cm}int creer\+\_\+coup (
+\begin{DoxyParamCaption}
+\item[{{\bf coup\+\_\+t} $\ast$}]{liste, }
+\item[{char}]{c\mbox{[}255\mbox{]}, }
+\item[{char}]{move\mbox{[}4\mbox{]}, }
+\item[{{\bf couleur\+\_\+t}}]{coul\+Joueur}
+\end{DoxyParamCaption}
+)}\hypertarget{coup_8c_a945ba1d8f638fa8f58b2989c9fa53a18}{}\label{coup_8c_a945ba1d8f638fa8f58b2989c9fa53a18}
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$liste} & \+: Liste de coup, contenant l\textquotesingle{}échiquier courant et le coup courant \\
+\hline
+{\em c} & \+: Commentaire \\
+\hline
+{\em move} & \+: Les positions \\
+\hline
+{\em coul\+Joueur} & \+: couleur du joueur courant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si aucune erreur n\textquotesingle{}a été rencontré 
+
+inférieur à 1 si problème a été rencontré 
+\end{DoxyReturn}
+\index{coup.\+c@{coup.\+c}!get\+Coups@{get\+Coups}}
+\index{get\+Coups@{get\+Coups}!coup.\+c@{coup.\+c}}
+\subsubsection[{\texorpdfstring{get\+Coups(\+F\+I\+L\+E $\ast$fp)}{getCoups(FILE *fp)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ get\+Coups (
+\begin{DoxyParamCaption}
+\item[{F\+I\+LE $\ast$}]{fp}
+\end{DoxyParamCaption}
+)}\hypertarget{coup_8c_a61186c1daa416ac01b93dee2e53b5090}{}\label{coup_8c_a61186c1daa416ac01b93dee2e53b5090}
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$fp} & \+: fichier à lire contenant les coup à jouer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$, la liste des coups à jouer 
+\end{DoxyReturn}

@@ -1,0 +1,8 @@
+digraph "the_sources" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_557c571f589e494eb740e122c4e09811 [shape=box, label="the_sources", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_557c571f589e494eb740e122c4e09811.html"];
+  dir_333171fd0d0ccabec98552f0272bdb8d [shape=box label="the_headers" URL="dir_333171fd0d0ccabec98552f0272bdb8d.html"];
+  dir_557c571f589e494eb740e122c4e09811->dir_333171fd0d0ccabec98552f0272bdb8d [headlabel="7", labeldistance=1.5 headhref="dir_000001_000000.html"];
+}

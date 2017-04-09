@@ -1,0 +1,104 @@
+\hypertarget{vt100_8h}{}\section{the\+\_\+headers/vt100.h File Reference}
+\label{vt100_8h}\index{the\+\_\+headers/vt100.\+h@{the\+\_\+headers/vt100.\+h}}
+{\ttfamily \#include \char`\"{}fonc\+\_\+carac.\+h\char`\"{}}\\*
+Include dependency graph for vt100.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7}{vt\+\_\+couleur\+\_\+t} \{ \\*
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7af77fb67151d0c18d397069ad8c271ba3}{B\+L\+A\+CK} =\textquotesingle{}0\textquotesingle{}, 
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7af80f9a890089d211842d59625e561f88}{R\+ED} =\textquotesingle{}1\textquotesingle{}, 
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7aa60bd322f93178d68184e30e162571ca}{G\+R\+E\+EN} =\textquotesingle{}2\textquotesingle{}, 
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7ae735a848bf82163a19236ead1c3ef2d2}{Y\+E\+L\+L\+OW} =\textquotesingle{}3\textquotesingle{}, 
+\\*
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a35d6719cb4d7577c031b3d79057a1b79}{B\+L\+UE} =\textquotesingle{}4\textquotesingle{}, 
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a56926c820ad72d0977e7ee44d9916e62}{M\+A\+G\+E\+N\+TA} =\textquotesingle{}5\textquotesingle{}, 
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7aafe71cad474c15ce63b300c470eef8cc}{C\+Y\+AN} =\textquotesingle{}6\textquotesingle{}, 
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a283fc479650da98250635b9c3c0e7e50}{W\+H\+I\+TE} =\textquotesingle{}7\textquotesingle{}, 
+\\*
+\hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a893c6b76f1c0df789783a2d1405d7dba}{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+L\+OR} =\textquotesingle{}9\textquotesingle{}
+ \}
+\item 
+enum \hyperlink{vt100_8h_aa99748893266c0da4cccc436c019ee07}{coloris\+\_\+dessin\+\_\+t} \{ \hyperlink{vt100_8h_aa99748893266c0da4cccc436c019ee07aa617d4ad3a6e955771a89ee88d9f5647}{B\+SB} =0, 
+\hyperlink{vt100_8h_aa99748893266c0da4cccc436c019ee07ae2dd4098c52c1ca585cf670994b74b2b}{N\+SB} =1, 
+\hyperlink{vt100_8h_aa99748893266c0da4cccc436c019ee07a559aeedd55ee12e7afc7ba7ae48ed7f9}{B\+SN} =2, 
+\hyperlink{vt100_8h_aa99748893266c0da4cccc436c019ee07abf319f63d9096d9201e44b5fa98c4cdc}{N\+SN} =3
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{vt100_8h_a08f5e4dd42c37f963696f97a3e9b967a}{definir\+\_\+coloris} (\hyperlink{vt100_8h_aa99748893266c0da4cccc436c019ee07}{coloris\+\_\+dessin\+\_\+t} colori, \hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7}{vt\+\_\+couleur\+\_\+t} piece\+\_\+c, \hyperlink{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7}{vt\+\_\+couleur\+\_\+t} case\+\_\+c)
+\item 
+void \hyperlink{vt100_8h_a67e69402ad5aaf08be6467efee7f39bc}{dessiner\+\_\+case} (\hyperlink{vt100_8h_aa99748893266c0da4cccc436c019ee07}{coloris\+\_\+dessin\+\_\+t} colori, char nom\+\_\+piece, \hyperlink{fonc__carac_8h_a707f7c6220d3db900f3d8f7f71c4b834}{affiche\+\_\+car\+\_\+func\+\_\+t} $\ast$afficher, \hyperlink{fonc__carac_8h_afd4ef61f124166f33512d47437ab24e5}{affiche\+\_\+func\+\_\+param\+\_\+t} param\+\_\+func)
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\index{vt100.\+h@{vt100.\+h}!coloris\+\_\+dessin\+\_\+t@{coloris\+\_\+dessin\+\_\+t}}
+\index{coloris\+\_\+dessin\+\_\+t@{coloris\+\_\+dessin\+\_\+t}!vt100.\+h@{vt100.\+h}}
+\subsubsection[{\texorpdfstring{coloris\+\_\+dessin\+\_\+t}{coloris_dessin_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf coloris\+\_\+dessin\+\_\+t}}\hypertarget{vt100_8h_aa99748893266c0da4cccc436c019ee07}{}\label{vt100_8h_aa99748893266c0da4cccc436c019ee07}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{B\+SB@{B\+SB}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!B\+SB@{B\+SB}}\item[{\em 
+B\+SB\hypertarget{vt100_8h_aa99748893266c0da4cccc436c019ee07aa617d4ad3a6e955771a89ee88d9f5647}{}\label{vt100_8h_aa99748893266c0da4cccc436c019ee07aa617d4ad3a6e955771a89ee88d9f5647}
+}]\index{N\+SB@{N\+SB}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!N\+SB@{N\+SB}}\item[{\em 
+N\+SB\hypertarget{vt100_8h_aa99748893266c0da4cccc436c019ee07ae2dd4098c52c1ca585cf670994b74b2b}{}\label{vt100_8h_aa99748893266c0da4cccc436c019ee07ae2dd4098c52c1ca585cf670994b74b2b}
+}]\index{B\+SN@{B\+SN}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!B\+SN@{B\+SN}}\item[{\em 
+B\+SN\hypertarget{vt100_8h_aa99748893266c0da4cccc436c019ee07a559aeedd55ee12e7afc7ba7ae48ed7f9}{}\label{vt100_8h_aa99748893266c0da4cccc436c019ee07a559aeedd55ee12e7afc7ba7ae48ed7f9}
+}]\index{N\+SN@{N\+SN}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!N\+SN@{N\+SN}}\item[{\em 
+N\+SN\hypertarget{vt100_8h_aa99748893266c0da4cccc436c019ee07abf319f63d9096d9201e44b5fa98c4cdc}{}\label{vt100_8h_aa99748893266c0da4cccc436c019ee07abf319f63d9096d9201e44b5fa98c4cdc}
+}]\end{description}
+\end{Desc}
+\index{vt100.\+h@{vt100.\+h}!vt\+\_\+couleur\+\_\+t@{vt\+\_\+couleur\+\_\+t}}
+\index{vt\+\_\+couleur\+\_\+t@{vt\+\_\+couleur\+\_\+t}!vt100.\+h@{vt100.\+h}}
+\subsubsection[{\texorpdfstring{vt\+\_\+couleur\+\_\+t}{vt_couleur_t}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf vt\+\_\+couleur\+\_\+t}}\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{B\+L\+A\+CK@{B\+L\+A\+CK}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!B\+L\+A\+CK@{B\+L\+A\+CK}}\item[{\em 
+B\+L\+A\+CK\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7af77fb67151d0c18d397069ad8c271ba3}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7af77fb67151d0c18d397069ad8c271ba3}
+}]\index{R\+ED@{R\+ED}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!R\+ED@{R\+ED}}\item[{\em 
+R\+ED\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7af80f9a890089d211842d59625e561f88}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7af80f9a890089d211842d59625e561f88}
+}]\index{G\+R\+E\+EN@{G\+R\+E\+EN}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!G\+R\+E\+EN@{G\+R\+E\+EN}}\item[{\em 
+G\+R\+E\+EN\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7aa60bd322f93178d68184e30e162571ca}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7aa60bd322f93178d68184e30e162571ca}
+}]\index{Y\+E\+L\+L\+OW@{Y\+E\+L\+L\+OW}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!Y\+E\+L\+L\+OW@{Y\+E\+L\+L\+OW}}\item[{\em 
+Y\+E\+L\+L\+OW\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7ae735a848bf82163a19236ead1c3ef2d2}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7ae735a848bf82163a19236ead1c3ef2d2}
+}]\index{B\+L\+UE@{B\+L\+UE}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!B\+L\+UE@{B\+L\+UE}}\item[{\em 
+B\+L\+UE\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a35d6719cb4d7577c031b3d79057a1b79}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a35d6719cb4d7577c031b3d79057a1b79}
+}]\index{M\+A\+G\+E\+N\+TA@{M\+A\+G\+E\+N\+TA}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!M\+A\+G\+E\+N\+TA@{M\+A\+G\+E\+N\+TA}}\item[{\em 
+M\+A\+G\+E\+N\+TA\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a56926c820ad72d0977e7ee44d9916e62}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a56926c820ad72d0977e7ee44d9916e62}
+}]\index{C\+Y\+AN@{C\+Y\+AN}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!C\+Y\+AN@{C\+Y\+AN}}\item[{\em 
+C\+Y\+AN\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7aafe71cad474c15ce63b300c470eef8cc}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7aafe71cad474c15ce63b300c470eef8cc}
+}]\index{W\+H\+I\+TE@{W\+H\+I\+TE}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!W\+H\+I\+TE@{W\+H\+I\+TE}}\item[{\em 
+W\+H\+I\+TE\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a283fc479650da98250635b9c3c0e7e50}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a283fc479650da98250635b9c3c0e7e50}
+}]\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+L\+OR@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+L\+OR}!vt100.\+h@{vt100.\+h}}\index{vt100.\+h@{vt100.\+h}!D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+L\+OR@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+L\+OR}}\item[{\em 
+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+L\+OR\hypertarget{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a893c6b76f1c0df789783a2d1405d7dba}{}\label{vt100_8h_a610237c9b54b2c3922ce9c766de83ba7a893c6b76f1c0df789783a2d1405d7dba}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Function Documentation}
+\index{vt100.\+h@{vt100.\+h}!definir\+\_\+coloris@{definir\+\_\+coloris}}
+\index{definir\+\_\+coloris@{definir\+\_\+coloris}!vt100.\+h@{vt100.\+h}}
+\subsubsection[{\texorpdfstring{definir\+\_\+coloris(coloris\+\_\+dessin\+\_\+t colori, vt\+\_\+couleur\+\_\+t piece\+\_\+c, vt\+\_\+couleur\+\_\+t case\+\_\+c)}{definir_coloris(coloris_dessin_t colori, vt_couleur_t piece_c, vt_couleur_t case_c)}}]{\setlength{\rightskip}{0pt plus 5cm}void definir\+\_\+coloris (
+\begin{DoxyParamCaption}
+\item[{{\bf coloris\+\_\+dessin\+\_\+t}}]{colori, }
+\item[{{\bf vt\+\_\+couleur\+\_\+t}}]{piece\+\_\+c, }
+\item[{{\bf vt\+\_\+couleur\+\_\+t}}]{case\+\_\+c}
+\end{DoxyParamCaption}
+)}\hypertarget{vt100_8h_a08f5e4dd42c37f963696f97a3e9b967a}{}\label{vt100_8h_a08f5e4dd42c37f963696f97a3e9b967a}
+\index{vt100.\+h@{vt100.\+h}!dessiner\+\_\+case@{dessiner\+\_\+case}}
+\index{dessiner\+\_\+case@{dessiner\+\_\+case}!vt100.\+h@{vt100.\+h}}
+\subsubsection[{\texorpdfstring{dessiner\+\_\+case(coloris\+\_\+dessin\+\_\+t colori, char nom\+\_\+piece, affiche\+\_\+car\+\_\+func\+\_\+t $\ast$afficher, affiche\+\_\+func\+\_\+param\+\_\+t param\+\_\+func)}{dessiner_case(coloris_dessin_t colori, char nom_piece, affiche_car_func_t *afficher, affiche_func_param_t param_func)}}]{\setlength{\rightskip}{0pt plus 5cm}void dessiner\+\_\+case (
+\begin{DoxyParamCaption}
+\item[{{\bf coloris\+\_\+dessin\+\_\+t}}]{colori, }
+\item[{char}]{nom\+\_\+piece, }
+\item[{{\bf affiche\+\_\+car\+\_\+func\+\_\+t} $\ast$}]{afficher, }
+\item[{{\bf affiche\+\_\+func\+\_\+param\+\_\+t}}]{param\+\_\+func}
+\end{DoxyParamCaption}
+)}\hypertarget{vt100_8h_a67e69402ad5aaf08be6467efee7f39bc}{}\label{vt100_8h_a67e69402ad5aaf08be6467efee7f39bc}

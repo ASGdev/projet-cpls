@@ -5,9 +5,24 @@
 #include "string.h"
 #include "prototype.h"
 
+/**
+ *\param p : char piece
+ *\param f : fonction qui permet l'affichage
+ *\return : la char est converti en une donnée utilisable par la fonction affichage
+ *Afficher_octet est la fonction qui gère la conversion de la pièce en une donnée utilisable par la fonction d'affichage à laquelle quelle elle délègue 
+ *l'affichage de la pièce (fonction de type affiche_func_param_t donnée en paramètre). Ici, on utilise directement la fonction putchar()
+ *qui permet d'afficher le caractère sur la sortie standard (cette fonction connaît déjà le descripteur de fichier correspondant, ce qui nous facilite la tâche).
+ */
+
 void afficher_octet(char p, affiche_func_param_t f){
     putchar(p);
 }
+
+/**
+ *
+ * \param echiquier : un échiquier à afficher
+ * \return l'afficher affiché dans le terminal
+ */
 
 void maj_affichage(echiquier_t echiquier){
     definir_coloris(BSN, WHITE, BLACK);

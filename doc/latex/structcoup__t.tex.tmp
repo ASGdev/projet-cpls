@@ -1,0 +1,29 @@
+\hypertarget{structcoup__t}{}\section{coup\+\_\+t Struct Reference}
+\label{structcoup__t}\index{coup\+\_\+t@{coup\+\_\+t}}
+
+
+Collaboration diagram for coup\+\_\+t\+:
+% FIG 0
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries numero}\hypertarget{structcoup__t_a2c30f43104974e72e2809fb4569804b0}{}\label{structcoup__t_a2c30f43104974e72e2809fb4569804b0}
+
+\item 
+couleur\+\_\+t {\bfseries joueur}\hypertarget{structcoup__t_a5a01f66d53ebc32c2b2783fe2174aef8}{}\label{structcoup__t_a5a01f66d53ebc32c2b2783fe2174aef8}
+
+\item 
+\hyperlink{structechiquier__t}{echiquier\+\_\+t} {\bfseries courant}\hypertarget{structcoup__t_a23bc58e9e0e54e9f173c2cb43bc127e9}{}\label{structcoup__t_a23bc58e9e0e54e9f173c2cb43bc127e9}
+
+\item 
+char {\bfseries commentaire} \mbox{[}255\mbox{]}\hypertarget{structcoup__t_af9ad893621d2105556aceeb452fe715c}{}\label{structcoup__t_af9ad893621d2105556aceeb452fe715c}
+
+\item 
+struct \hyperlink{structcoup__t}{coup\+\_\+t} $\ast$ {\bfseries prochain}\hypertarget{structcoup__t_a6061643e85d05b42fd9eb356c664b38e}{}\label{structcoup__t_a6061643e85d05b42fd9eb356c664b38e}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+the\+\_\+headers/prototype.\+h\end{DoxyCompactItemize}

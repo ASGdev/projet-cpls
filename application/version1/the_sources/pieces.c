@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include "prototype.h"
 
+/**
+ * 
+ * \param piece : char correspondant à une piece du jeu
+ * \return type piece_t correspondant au char
+ */
+
 piece_t piece_de_lettre (char piece){
 	#if FR
 		switch (piece){
@@ -59,6 +65,12 @@ piece_t piece_de_lettre (char piece){
 		}
     #endif
 }
+
+/**
+ * 
+ * \param piece : piece_t correspondant à une piece du jeu
+ * \return type char correspondant à la piece_t donnée
+ */
 
 char lettre_de_piece (piece_t piece){
 	#if FR
