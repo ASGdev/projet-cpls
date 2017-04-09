@@ -440,7 +440,7 @@ int main(int argc, char *argv[]){
 
     } else {
         // insertion clavier
-        continuer: printf("Passage en mode clavier\n");
+        continuer: printf("");
         char newMove[5];
 
         // ouverture du fichier de sortie
@@ -453,13 +453,34 @@ int main(int argc, char *argv[]){
         for(int i=0; i<257; i++){
             if(filename[i] == '\n'){
                 filename[i] = '\0';
-            }// TODO : gérer saut de ligne dans le fichier
+            }
         }
 
         fs = fopen(filename, "w+");
         if(fs == NULL){
         	printf("\nErreur de fichier de sortie !\n\n");
         	exit(66);
+        }
+
+        // Sauvegarde le contenu de l'ancien fichier dans le nouveau
+        if(jeu.inputMode == 1 && jeu.fileProvided){
+            //ajout fichier de début si fichier de jeu défini
+            #ifdef DEBUG
+                printf("Sauvegarde du fichier...\n");
+            #endif
+            rewind(fs);
+            int i = 0;
+            char move[5];
+            while(l[i] != '\0'){
+                move[0] = l[i];
+                move[1] = l[i+1];
+                move[2] = l[i+2];
+                move[3] = l[i+3];
+                move[4] = '\n';
+                i+=4;
+
+                fputs(move, fs);
+            }
         }
 
         do {
@@ -501,11 +522,6 @@ int main(int argc, char *argv[]){
 
 
         } while(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n');
-
-        if(jeu.inputMode == 1 && jeu.fileProvided){
-            //ajout fichier de début si fichier de jeu défini
-        }
-
     }
 
 }
