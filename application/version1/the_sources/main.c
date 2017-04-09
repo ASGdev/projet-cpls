@@ -114,11 +114,6 @@ int main(int argc, char *argv[]){
         }
 
         do {
-            newMove[0] = ' ';
-            newMove[1] = ' ';
-            newMove[2] = ' ';
-            newMove[3] = ' ';
-            newMove[4] = ' ';
             if(jeu.couleurCourante == BLANC){
                 printf("Joueur Noir joue : ");
                 jeu.couleurCourante = NOIR;
@@ -127,17 +122,24 @@ int main(int argc, char *argv[]){
                 jeu.couleurCourante = BLANC;
             }
             // move ou fin
-            fgets(newMove, 15, stdin);
-            newMove[4]='\0';
-            #ifdef DEBUG
-            	printf("Newmove = %s-", newMove);
-			#endif
-            printf("\n");
-
-            char comm [255];
-            strcpy(comm, "newcoup");
-            int sortie = creer_coup(&echiquier, comm, newMove, jeu.couleurCourante);
-            printf("%d\n", sortie);
+            int sortie = 0;
+            while(sortie != 1){
+	            fgets(newMove, 15, stdin);
+	            newMove[4]='\0';
+	            if(newMove[0] == 'f' && newMove[1] == 'i' && newMove[2] == 'n'){
+	            	break;
+	            }
+	            #ifdef DEBUG
+	            	printf("Newmove = %s-", newMove);
+				#endif
+	            printf("\n");
+	            char comm [255];
+	            strcpy(comm, "newcoup");
+	            sortie = creer_coup(&echiquier, comm, newMove, jeu.couleurCourante);
+                if(sortie != 1){
+                	printf("Veuillez rejouer : ");
+                }
+            }
 
 		    case_t casecour = get_case(echiquier.courant, 4, 0, casecour);
 		    piece_t piececour = piece_t_de_case_t(casecour);

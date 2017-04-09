@@ -116,9 +116,9 @@ char colonne_de_indice(int i){
 }
 
 int char_ligne_valide(char l){
-    return ('l'>48 && 'l'<57);
+    return (l-'0'>-1 && l-'0'<8);
 }
 
 int char_colonne_valide(char l){
-    return ('l'>64 && 'l'<73);
+    return (l-'a'>-1 && l-'a'<8);
 }

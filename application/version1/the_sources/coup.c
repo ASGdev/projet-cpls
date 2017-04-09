@@ -6,9 +6,24 @@ int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
     // move pas sur la même case
 
     if((move[0] == move[2]) && (move[1] == move[3])){
+      printf("La case de départ est la meme que la case d'arrivee \n");
         return -1;
     }
 
+    int correct = 0;
+    if(char_ligne_valide(move[0])){
+        if(char_colonne_valide(move[1])){
+            if(char_ligne_valide(move[2])){
+                if(char_colonne_valide(move[3])){
+                    correct = 1;
+                }
+            }
+        }
+    }
+    if (!correct){
+      printf("Vous jouez hors de l'échiquier\n");
+      return -2;
+    }
     int coldep = indice_de_ligne(move[0])-1;
     int ligdep = indice_de_colonne(move[1]);
     int colarr = indice_de_ligne(move[2])-1;
@@ -18,12 +33,6 @@ int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
     printf("%d\n", coldep);
     printf("%d\n", colarr);
 
-    // if (coldep<0 || ligdep<0 || colarr<0 || ligarr<0 || coldep>7 || ligdep>7 || colarr>7 || ligarr>7){ //Coup pas dans l'échiquier
-    if(char_ligne_valide(ligdep)!=0||char_ligne_valide(ligarr!=0)||char_colonne_valide(coldep)!=0||char_colonne_valide(colarr)!=0){
-      printf("Coup pas dans l'échiquier\n");
-    	return -2;
-    }
-
     case_t casecour = get_case(liste->courant, ligdep, coldep, casecour);
     piece_t piececour = piece_t_de_case_t(casecour);
     couleur_t couleurcour = couleur_t_de_case_t(casecour);
@@ -32,10 +41,13 @@ int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
     piece_t piecearr = piece_t_de_case_t(casearr);
     couleur_t couleurarr = couleur_t_de_case_t(casearr);
 
-   	if (piecearr!=VIDE && couleurcour == couleurarr){ // ON NE PEUT PAS MANGER UNE PIECE A NOUS
-      printf("Vous ne pouvez pas manger votre piece\n");
-    	return -3;
-   	}else if((piececour!=VIDE && couleurcour == coulJoueur)){
+   	if (piececour == VIDE) {
+      printf("Il n'y as pas de piece là ou vous essayez de jouer\n");
+      return -3;
+    }else if (piecearr!=VIDE && couleurcour == couleurarr){ // ON NE PEUT PAS MANGER UNE PIECE A NOUS
+      printf("Vous ne pouvez pas manger une de vos piece\n");
+    	return -4;
+   	}else if((piececour!=VIDE && couleurcour == coulJoueur)){ // Si on essaye bien de bouger une de nos pièce on bouge
       printf("On se déplace\n");
       case_t newcase = case_t_de_pc(piececour,couleurcour);
    		liste->courant = set_case(liste->courant,ligarr, colarr, newcase);
@@ -43,9 +55,12 @@ int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
       casecour.piece = VIDE;
       liste->courant = set_case(liste->courant,ligdep, coldep, casecour);
       return 1;
-   	}
+   	}else if(couleurcour!=coulJoueur){
+      printf("Attention vous essayez de bouger une piece qui ne vous appartient pas ! \n");
+      return-5;
+    }
     printf("Une erreur c'est produite\n");
-    return -4;
+    return -10;
 }
 
 
