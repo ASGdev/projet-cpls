@@ -140,12 +140,6 @@ int main(int argc, char *argv[]){
                 	printf("Veuillez rejouer : ");
                 }
             }
-
-		    case_t casecour = get_case(echiquier.courant, 4, 0, casecour);
-		    piece_t piececour = piece_t_de_case_t(casecour);
-			char cpiececour = lettre_de_piece(piececour);
-			printf("%c", cpiececour);
-
     		maj_affichage(echiquier.courant);
 
             //ecriture dans le fichier (sauf fin)
