@@ -21,7 +21,7 @@ int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
         }
     }
     if (!correct){
-      printf("Vous jouez hors de l'échiquier\n");
+      printf("Vous jouez hors de l'échiquier ou vous avez mis une commande non valide\n");
       return -2;
     }
     int coldep = indice_de_ligne(move[0])-1;
