@@ -41,7 +41,7 @@ typedef struct
 
 piece_t piece_de_lettre(char lettre){
 
-    #if LOCALE==fr
+    #if LOCALE==0
         switch(lettre) {
             case 'R' :
                 return(K);
@@ -79,7 +79,40 @@ piece_t piece_de_lettre(char lettre){
 }
 
 char lettre_de_piece(piece_t p){
-    return 'a';
+    // #if LOCALE==fr
+    //     switch(lettre) {
+    //         case 'R' :
+    //             return(K);
+    //             break;
+    //         case 'D' :
+    //             return (Q);
+    //             break;
+    //         case 'F' :
+    //         case 'B' :
+    //             break;
+    //         default :
+    //             return (MARK);
+
+    //             break;
+    //     }
+    // #else
+    //     switch(lettre) {
+    //         case 'R' :
+    //         case 'K' :
+    //             return(K);
+    //             break;
+    //         case 'Q' :
+    //         case 'D' :
+    //             return (Q);
+    //             break;
+    //         case 'F' :
+    //         case 'B' :
+    //             break;
+    //         default :
+    //             break;
+    //             return (MARK);
+    //     }
+    // #endif
 }
 
 
@@ -296,6 +329,13 @@ void maj_affichage(echiquier_t e){
 
 void executer_tests(){
     printf("=== Début des tests ===\n");
+    #ifdef LOCALE
+        #if LOCALE==0
+            printf("FR\n");
+        #else
+            printf("EN\n");
+        #endif
+    #endif
     printf("Ligne a valide %d\n", char_ligne_valide('a'));
     printf("Ligne h valide %d\n", char_ligne_valide('h'));
     printf("Ligne i valide %d\n", char_ligne_valide('i'));
