@@ -1,30 +1,93 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "prototype.h"
 
-int creer_coup(coup_t *liste, char c[255], char move[4]){
+int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
     // move pas sur la même case
-    if(move[0] == move[2] && move[1] == move[3]){
+
+    if((move[0] == move[2]) && (move[1] == move[3])){
         return -1;
     }
 
-    int coldep = indice_de_colonne(move[0]);
+    int coldep = indice_de_ligne(move[0])-1;
     int ligdep = indice_de_colonne(move[1]);
-    int colarr = indice_de_colonne(move[2]);
+    int colarr = indice_de_ligne(move[2])-1;
     int ligarr = indice_de_colonne(move[3]);
+    printf("%d\n", ligdep);
+    printf("%d\n", ligarr);
+    printf("%d\n", coldep);
+    printf("%d\n", colarr);
 
     // if (coldep<0 || ligdep<0 || colarr<0 || ligarr<0 || coldep>7 || ligdep>7 || colarr>7 || ligarr>7){ //Coup pas dans l'échiquier
-    if(char_ligne_valide(ligdep)!=1||char_ligne_valide(ligarr!=1)||char_colonne_valide(coldep)!=1||char_colonne_valide(colarr)!=1){	
-    	return -1;
+    if(char_ligne_valide(ligdep)!=0||char_ligne_valide(ligarr!=0)||char_colonne_valide(coldep)!=0||char_colonne_valide(colarr)!=0){
+      printf("Coup pas dans l'échiquier\n");
+    	return -2;
     }
 
-    case_t casecour;
+    case_t casecour = get_case(liste->courant, ligdep, coldep, casecour);
     piece_t piececour = piece_t_de_case_t(casecour);
     couleur_t couleurcour = couleur_t_de_case_t(casecour);
-   	get_case(liste->courant, ligarr, colarr, casecour);
-   	if (piececour!=VIDE && couleur_t_de_case_t(casecour)==liste->joueur){ // case non vide et pièce de même couleur donc erreur
-    	return -1;
-   	}else if(piececour!=VIDE && couleur_t_de_case_t(casecour)!=liste->joueur || piececour==VIDE){
-   		*c='D';
-        case_t newcase = case_t_de_pc(piececour,liste->joueur);
-   		set_case(liste->courant,ligarr, colarr, newcase);
+
+    case_t casearr = get_case(liste->courant, ligarr, colarr, casearr);
+    piece_t piecearr = piece_t_de_case_t(casearr);
+    couleur_t couleurarr = couleur_t_de_case_t(casearr);
+
+   	if (piecearr!=VIDE && couleurcour == couleurarr){ // ON NE PEUT PAS MANGER UNE PIECE A NOUS
+      printf("Vous ne pouvez pas manger votre piece\n");
+    	return -3;
+   	}else if((piececour!=VIDE && couleurcour == coulJoueur)){
+      printf("On se déplace\n");
+      case_t newcase = case_t_de_pc(piececour,couleurcour);
+   		liste->courant = set_case(liste->courant,ligarr, colarr, newcase);
+
+      casecour.piece = VIDE;
+      liste->courant = set_case(liste->courant,ligdep, coldep, casecour);
+      return 1;
    	}
+    printf("Une erreur c'est produite\n");
+    return -4;
+}
+
+
+char* getCoups(FILE *fp){
+    /* on insère les coups dans une variable "tampon". Permet notamment de libérer le fichier et un accès plus rapide car en mémoire */
+
+    /* itération pour découvrir le nombre de ligne du fichier - optimisation : utiliser realloc on-the-fly */
+    int lineCount= 0;
+    char string[5];
+    while (!feof(fp)) {
+        fscanf(fp, "%5c" , string);
+        lineCount++;
+    }
+
+    #ifdef DEBUG
+      printf("Nombre de lignes du fichier : %d\n",lineCount);
+    #endif
+
+    char *listeCoup = malloc(4 * lineCount * sizeof(char));
+    char c;
+    int flag = 0;
+    int i = 0;
+
+    rewind(fp);
+    while ((c = fgetc(fp)) != EOF){
+        if(c != '\n'){
+          #ifdef DEBUG
+              printf("%c %d\n", c, flag);
+            #endif
+
+            *(listeCoup + i) = c;
+            i++;
+            flag++;
+        } else {
+            if(flag < 4){
+                printf("\nErreur de données dans le fichier de jeu !\n");
+                exit(65); // EX_DATAERR
+            }
+            flag = 0;
+        }
+    }
+
+    fclose(fp);
+    return listeCoup;
 }
