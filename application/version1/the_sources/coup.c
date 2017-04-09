@@ -28,10 +28,12 @@ int creer_coup(coup_t *liste, char c[255], char move[4], couleur_t coulJoueur){
     int ligdep = indice_de_colonne(move[1]);
     int colarr = indice_de_ligne(move[2])-1;
     int ligarr = indice_de_colonne(move[3]);
-    printf("%d\n", ligdep);
-    printf("%d\n", ligarr);
-    printf("%d\n", coldep);
-    printf("%d\n", colarr);
+    #if DEBUG
+	    printf("%d\n", ligdep);
+	    printf("%d\n", ligarr);
+	    printf("%d\n", coldep);
+	    printf("%d\n", colarr);
+    #endif
 
     case_t casecour = get_case(liste->courant, ligdep, coldep, casecour);
     piece_t piececour = piece_t_de_case_t(casecour);

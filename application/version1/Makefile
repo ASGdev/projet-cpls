@@ -9,7 +9,7 @@ OPTIM=-O2
 # Executable
 main:
 	# $(CC) $(INCLUDE) -L/media/bastien/DATA/polytech/csystem/projet/clone3/projet-cpls/lib/ -lvt100 $(SRC_DIR)/main.c -o $@
-	$(CC) $(INCLUDE) -D EN -D DEBUG ./the_sources/*.c -o main -L./../../lib -lvt100
+	$(CC) $(INCLUDE) -D EN -D NODEBUG ./the_sources/*.c -o main -L./../../lib -lvt100
 	# export LD_LIBRARY_PATH=.
 	# main.o:
 	# 	$(CC) $(INCLUDE) -c $(SRC_DIR)/main.c

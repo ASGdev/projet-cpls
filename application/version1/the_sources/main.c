@@ -6,55 +6,6 @@
 #include "prototype.h"
 
 
-void afficher_octet(char p, affiche_func_param_t f){
-    putchar(p);
-}
-
-void maj_affichage(echiquier_t echiquier){
-    definir_coloris(BSN, WHITE, BLACK);
-    definir_coloris(NSB, BLACK, WHITE);
-    // FILE *fout = stdout;
-    affiche_func_param_t u;
-
-    case_t casecour;
-    piece_t piececour;
-	char cpiececour;
-
-    printf("   a  b  c  d  e  f  g  h\n\n");
-    for(int j = 0; j < 8; j++){
-        putchar(j+1+'0');
-        putchar(' ');
-        for(int i = 0; i < 8; i++){
-            casecour = get_case(echiquier, i, j, casecour);
-            piececour = piece_t_de_case_t(casecour);
-            cpiececour = lettre_de_piece(piececour);
-            // printf("Piece cour%c", cpiececour); TOUJOUR R
-            if (j%2 == 0){
-                if (i%2 == 0){
-                    dessiner_case(NSB, ' ', afficher_octet, u);
-                    dessiner_case(NSB, cpiececour, afficher_octet, u);
-                    dessiner_case(NSB, ' ', afficher_octet, u);
-                }else{
-                    dessiner_case(BSN, ' ', afficher_octet, u);
-                    dessiner_case(BSN, cpiececour, afficher_octet, u);
-                    dessiner_case(BSN, ' ', afficher_octet, u);
-                }
-            }else{
-                if (i%2 == 1){
-                    dessiner_case(NSB, ' ', afficher_octet, u);
-                    dessiner_case(NSB, cpiececour, afficher_octet, u);
-                    dessiner_case(NSB, ' ', afficher_octet, u);
-                }else{
-                    dessiner_case(BSN, ' ', afficher_octet, u);
-                    dessiner_case(BSN, cpiececour, afficher_octet, u);
-                    dessiner_case(BSN, ' ', afficher_octet, u);
-                }
-            }
-        }
-        printf("\n\n");
-    }
-}
-
 int main(int argc, char *argv[]){
 	#if FR
 		printf("Mode Francais\n");
@@ -77,6 +28,7 @@ int main(int argc, char *argv[]){
 
     game_t jeu;
     jeu.fileProvided = 0;
+    jeu.couleurCourante = NOIR;
 
     if(argc < 2){
         printf("Pas de fichier de jeu fourni : passage en mode clavier\n");
@@ -126,7 +78,8 @@ int main(int argc, char *argv[]){
 	            strcpy(comm, "newcoup");
 	            sortie = creer_coup(&echiquier, comm, move, jeu.couleurCourante);
                 if(sortie != 1){
-                	printf("Veuillez rejouer : ");
+                	printf("\nErreur de données dans le fichier de jeu !\n");
+                	exit(65);
                 }
             }
         }
@@ -148,7 +101,7 @@ int main(int argc, char *argv[]){
 
     } else {
 		// insertion clavier
-        continuer: printf("Passage en mode clavier\n");
+        continuer: printf("");
         char newMove[5];
         // char poub;
 
@@ -169,6 +122,26 @@ int main(int argc, char *argv[]){
         	exit(66);
         }
 
+        // Sauvegarde le contenu de l'ancien fichier dans le nouveau
+        if(jeu.inputMode == 1 && jeu.fileProvided){
+            //ajout fichier de début si fichier de jeu défini
+            #ifdef DEBUG
+                printf("Sauvegarde du fichier...\n");
+            #endif
+            rewind(fs);
+            int i = 0;
+            char move[5];
+            while(l[i] != '\0'){
+                move[0] = l[i];
+                move[1] = l[i+1];
+                move[2] = l[i+2];
+                move[3] = l[i+3];
+                move[4] = '\n';
+                i+=4;
+                fputs(move, fs);
+            }
+        }
+
         do {
             if(jeu.couleurCourante == BLANC){
                 printf("Joueur Noir joue : ");
@@ -180,10 +153,10 @@ int main(int argc, char *argv[]){
             // move ou fin
             int sortie = 0;
             while(sortie != 1){
-	            fgets(newMove, 15, stdin);
 	            newMove[4]='\0';
-	            if(newMove[0] == 'f' && newMove[1] == 'i' && newMove[2] == 'n'){
-	            	break;
+	            if(fgets(newMove, 15, stdin) == NULL){
+	            	printf("\nFin du jeu.\n");
+	                exit(0);
 	            }
 	            #ifdef DEBUG
 	            	printf("Newmove = %s-", newMove);
@@ -199,10 +172,8 @@ int main(int argc, char *argv[]){
     		maj_affichage(echiquier.courant);
 
             //ecriture dans le fichier (sauf fin)
-            if(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n'){
-            	fputs(newMove,fs);
-            	fprintf(fs, "\n");
-            }
-        } while(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n');
+        } while(newMove != NULL);
     }
 }
+
+

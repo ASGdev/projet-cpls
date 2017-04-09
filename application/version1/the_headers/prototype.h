@@ -1,3 +1,6 @@
+#include "../the_headers/vt100.h"
+#include "vt100.h"
+#include "string.h"
 // PIECE
 
 typedef enum piece_t {
@@ -73,3 +76,9 @@ typedef struct{
     couleur_t couleurCourante;
     struct coup_t *premierCoup; // référence vers le premier coup
 } listeCoup_t;
+
+
+// AFFICHAGE
+
+void afficher_octet(char p, affiche_func_param_t f);
+void maj_affichage(echiquier_t echiquier);
