@@ -364,6 +364,14 @@ void executer_tests(){
     printf("=== Fin des tests ===\n");
 }
 
+/**
+ * 
+ * \param argc : nombre d'argument (non utilisé par l'utilisateur)
+ * \param argv : 1 argument, le fichier de jeu en entrée
+ * \return 0 si aucune erreur ou sortie utilisateur par CTRL-D
+ * \return 66 si problème d'entrée/sortie de fichier
+ * Point d'entrée et interfacage avec l'utilisateur
+ */
 int main(int argc, char *argv[]){
     FILE *fp;
     char *l;
@@ -516,6 +524,7 @@ int main(int argc, char *argv[]){
         } while(newMove != NULL);
     }
 
+    return 0;
 }
 
 
