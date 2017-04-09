@@ -492,21 +492,14 @@ int main(int argc, char *argv[]){
                 jeu.couleurCourante = white;
             }
             // move ou fin et clean entree
-            fgets(newMove, 15, stdin);
+            if(fgets(newMove, 15, stdin) == NULL){
+                printf("\nFin du jeu.\n");
+                exit(0);
+            }
             newMove[4]='\0';
 
-            int correct = 0;
-            if(char_ligne_valide(newMove[0])){
-                if(char_colonne_valide(newMove[1])){
-                    if(char_ligne_valide(newMove[2])){
-                        if(char_colonne_valide(newMove[3])){
-                            correct = 1;
-                        }
-                    }
-                }
-            }
             #ifdef DEBUG
-            	printf("Nouveau mouvement = %s %d-", newMove, correct);
+            	printf("Nouveau mouvement = %s", newMove);
 			#endif
             printf("\n");
 
@@ -514,14 +507,13 @@ int main(int argc, char *argv[]){
             // TODO : ajout fichier de début si fichier de jeu défini
             // TODO : clean user input ?
             // TODO : gérer saut de ligne dans le fichier
-            if(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n'){
-            	//fprintf(fs, newMove);
-                fputs(newMove, fs);
-            	fprintf(fs, "\n");
-            }
+
+            fputs(newMove, fs);
+            fprintf(fs, "\n");
 
 
-        } while(newMove[0] != 'f' && newMove[1] != 'i' && newMove[2] != 'n');
+
+        } while(newMove != NULL);
     }
 
 }
